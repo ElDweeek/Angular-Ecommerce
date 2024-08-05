@@ -1,0 +1,79 @@
+<section class="product container mt-5">
+  <div class="row">
+    <div class="product-photo-container col-lg-6 col-md-12 position-relative">
+
+      <div class="product__photo">
+        <div class="photo-container">
+          <div class="photo-main">
+            <div class="controls">
+              <i class="material-icons pi pi-share-alt p-2"></i>
+              <i class="material-icons pi pi-heart-fill p-2"></i>
+            </div>
+            <img src="{{product?.thumbnail}}" alt="{{product?.title}}">
+          </div>
+          <div class="photo-album">
+            <ul>
+              <li><img src="{{product?.thumbnail}}"></li>
+              <li><img src="{{product?.thumbnail}}"></li>
+              <li><img src="{{product?.thumbnail}}"></li>
+              <li><img src="{{product?.thumbnail}}"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="product-info-container offset-1 col-lg-5 col-md-12">
+
+      <div class="product__info">
+        <div class="title">
+          <h1>{{product?.title}}</h1>
+          <span>{{product?.rating}}</span>
+        </div>
+        <div class="price">
+          <span>{{product?.price}} </span>$
+        </div>
+        <div class="variant">
+          <h3>SELECT A COLOR</h3>
+          <ul>
+            <li><img src="{{product?.thumbnail}}"></li>
+            <li><img src="{{product?.thumbnail}}"></li>
+            <li><img src="{{product?.thumbnail}}"></li>
+            <li><img src="{{product?.thumbnail}}"></li>
+          </ul>
+        </div>
+        <div class="description">
+          <h3>Details</h3>
+          <ul>
+            <li>
+              <h6>description</h6>
+              {{product?.description}}
+            </li>
+            <li>
+              <h6>warranty</h6>
+              {{product?.warrantyInformation}}
+            </li>
+            <li>
+              <h6>weight</h6>
+              {{product?.weight}}
+            </li>
+            <li>
+              <h6>dimensions</h6>
+              <p>Width: {{product?.dimensions?.width}}</p>
+              <p>height: {{product?.dimensions?.height}}</p>
+              <p>depth: {{product?.dimensions?.depth}}</p>
+            </li>
+          </ul>
+        </div>
+        <button class="buy--btn">ADD TO CART</button>
+      </div>
+    </div>
+  </div>
+</section>
