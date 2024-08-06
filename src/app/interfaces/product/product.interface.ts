@@ -1,43 +1,41 @@
-
 export interface Product {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  tags: string[];
-  brand: string;
-  sku: string;
-  weight: number;
-  dimensions: {
-    width: number;
-    height: number;
-    depth: number;
-  };
-  warrantyInformation: string;
-  shippingInformation: string;
-  availabilityStatus: string;
-  reviews: Review[];
-  returnPolicy: string;
-  minimumOrderQuantity: number;
-  meta: {
-    createdAt: string; // ISO 8601 Date string
-    updatedAt: string; // ISO 8601 Date string
-    barcode: string;
-    qrCode: string;
-  };
+  sold: number;
   images: string[];
-  thumbnail: string;
+  subcategory: Subcategory[];
+  ratingsQuantity: number;
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+  quantity: number;
+  price: number;
+  imageCover: string;
+  category: Category;
+  brand: Brand;
+  ratingsAverage: number;
+  createdAt: string;
+  updatedAt: string;
+  id: string;
 }
 
-interface Review {
-  rating: number;
-  comment: string;
-  date: string; // ISO 8601 Date string
-  reviewerName: string;
-  reviewerEmail: string;
+
+interface Subcategory {
+  _id: string;
+  name: string;
+  slug: string;
+  category: string;
 }
 
+interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+  image: string;
+}
+
+interface Brand {
+  _id: string;
+  name: string;
+  slug: string;
+  image: string;
+}

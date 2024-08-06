@@ -6,6 +6,9 @@
   <div class="container">
     <h3 class="text-center bg-body-secondary p-3 mt-5 mb-3">All Products</h3>
     <div class="row pb-3">
+      
+      <div *ngIf="isLoading">Loading...</div>
+      <div *ngIf="!isLoading && products.length === 0">No products found.</div>
       @for (product of products; track product) {
         <div class="col-lg-3 col-md-4 col-sm-6 col-12 mx-auto">
         <single-product [product]="product" ></single-product>

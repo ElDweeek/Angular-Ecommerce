@@ -7,19 +7,21 @@ import { Product } from '../../interfaces/product/product.interface';
 import { TruncateModule } from '../../modules/truncate.module';
 import { SingleProductComponent } from "../../components/single-product/single-product.component";
 import { TopRatedProductsComponent } from "../../components/top-rated-products/top-rated-products.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'products',
   standalone: true,
-  imports: [CardModule, ButtonModule, TruncateModule, SingleProductComponent, TopRatedProductsComponent],
+  imports: [CardModule, ButtonModule, TruncateModule, SingleProductComponent, TopRatedProductsComponent,NgIf],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   products: Array<Product> = [];
-  limit: number = 7;
-  skip: number = 0;
+  limit: number = 10;
+  page: number = 0;
   hasMoreData: boolean = true;
+  isLoading = true;
 
   private subscription!: Subscription;
   constructor(private _getProducts: ProductsService) {}
@@ -32,15 +34,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   getStreamOfData(){
 
-    this.subscription = this._getProducts.getStreamOfProducts(this.limit,this.skip).subscribe({
+    this.subscription = this._getProducts.getStreamOfProducts(this.limit,this.page).subscribe({
       next: (res) => {
-        this.products = [...this.products, ...res.products];
+        this.products = [...this.products, ...res.data];
         // console.log(this.products);
-        this.skip += this.limit;
-        this.hasMoreData = res.products.length === this.limit;
+        this.page ++;
+        this.hasMoreData = res.data.length === this.limit;
+        this.isLoading = false;
+
       },
       error: (err) => {
         console.log(err);
+        this.isLoading = false;
+
       },
       complete: () => {
         console.log("Got Products");

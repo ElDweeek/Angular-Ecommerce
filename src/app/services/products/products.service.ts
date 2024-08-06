@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ProductsService {
+  apiUrl = "https://ecommerce.routemisr.com"
   // 17
   // _httpClient = Inject(HttpClient)
   // constructor() {}
@@ -16,24 +17,24 @@ export class ProductsService {
 
 
   getAllProducts(): Observable<any> {
-    return this._httpClient.get(`https://dummyjson.com/products`)
+    return this._httpClient.get(`${this.apiUrl}/api/v1/products?limit=0`)
   }
 
-getStreamOfProducts(limit: number,skip:number): Observable<any> {
-  return this._httpClient.get(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`)
+getStreamOfProducts(limit: number,page:number): Observable<any> {
+  return this._httpClient.get(`${this.apiUrl}/api/v1/products?limit=${limit}&page=${page}`)
 }
 
-  getProductById(id: number): Observable<any> {
-    return this._httpClient.get<Product>(`https://dummyjson.com/products/${id}`)
+  getProductById(id: string): Observable<any> {
+    return this._httpClient.get<Product>(`${this.apiUrl}/api/v1/products/${id}`)
   }
 
-  getProductViewDetails(productId: number) {
+  getProductViewDetails(productId: string) {
     this.router.navigate([`/products/${productId}`]);
   }
 
   getProductsByCategory(category: string): Observable<any> {
-    return this._httpClient.get<any>(`https://dummyjson.com/products?limit=0`).pipe(
-      map(res => res.products.filter((product: Product)=> product.category === category))
+    return this._httpClient.get<any>(`${this.apiUrl}/api/v1/products?limit=0`).pipe(
+      map(res => res.products.filter((product: Product)=> product.category.name === category))
     )
   }
 }

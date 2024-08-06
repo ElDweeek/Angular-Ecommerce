@@ -9,14 +9,13 @@
               <i class="material-icons pi pi-share-alt p-2"></i>
               <i class="material-icons pi pi-heart-fill p-2"></i>
             </div>
-            <img src="{{product?.thumbnail}}" alt="{{product?.title}}">
+            <img src="{{product?.imageCover}}" alt="{{product?.title}}">
           </div>
           <div class="photo-album">
             <ul>
-              <li><img src="{{product?.thumbnail}}"></li>
-              <li><img src="{{product?.thumbnail}}"></li>
-              <li><img src="{{product?.thumbnail}}"></li>
-              <li><img src="{{product?.thumbnail}}"></li>
+              @for(image of product?.images; track image) {
+                <li><img src="{{image}}"></li>
+              }
             </ul>
           </div>
         </div>
@@ -35,7 +34,7 @@
       <div class="product__info">
         <div class="title">
           <h1>{{product?.title}}</h1>
-          <span>{{product?.rating}}</span>
+          <span>{{product?.ratingsAverage}}</span>
         </div>
         <div class="price">
           <span>{{product?.price}} </span>$
@@ -43,10 +42,9 @@
         <div class="variant">
           <h3>SELECT A COLOR</h3>
           <ul>
-            <li><img src="{{product?.thumbnail}}"></li>
-            <li><img src="{{product?.thumbnail}}"></li>
-            <li><img src="{{product?.thumbnail}}"></li>
-            <li><img src="{{product?.thumbnail}}"></li>
+            @for(image of product?.images; track image) {
+              <li><img src="{{image}}"></li>
+            }
           </ul>
         </div>
         <div class="description">
@@ -57,10 +55,10 @@
               {{product?.description}}
             </li>
             <li>
-              <h6>warranty</h6>
-              {{product?.warrantyInformation}}
+              <h6>brand</h6>
+              {{product?.brand?.name}}
             </li>
-            <li>
+            <!-- <li>
               <h6>weight</h6>
               {{product?.weight}}
             </li>
@@ -69,7 +67,7 @@
               <p>Width: {{product?.dimensions?.width}}</p>
               <p>height: {{product?.dimensions?.height}}</p>
               <p>depth: {{product?.dimensions?.depth}}</p>
-            </li>
+            </li> -->
           </ul>
         </div>
         <button class="buy--btn">ADD TO CART</button>
