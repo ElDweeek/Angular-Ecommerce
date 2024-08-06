@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-dark">
+<nav class="navbar navbar-expand-lg bg-dark p-0">
   <div class="container-fluid ms-2 me-2" >
-    <a class="navbar-brand" routerLink="home">
+    <a class="navbar-brand p-0" routerLink="home">
       <img src="{{Logo}}" class="w-50" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
@@ -8,17 +8,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item ms-4 me-4">
-          <a class="nav-link active " aria-current="page" style=" color: white;" routerLink="home" routerLinkActive="bg-secondary-subtle text-dark rounded fw-bold">Home</a>
+        <li class="nav-item ms-4 me-4 ">
+          <a class="nav-link active pt-3 pb-3" aria-current="page" style=" color: white;" routerLink="home" routerLinkActive="navLinkActive fw-bold">Home</a>
         </li>
         <li class="nav-item ms-4 me-4">
-          <a class="nav-link" style=" color: white;" routerLink="about"  routerLinkActive="bg-secondary-subtle text-dark rounded fw-bold">About</a>
+          <a class="nav-link  pt-3 pb-3" style=" color: white;" routerLink="about"  routerLinkActive="navLinkActive fw-bold">About</a>
         </li>
         <li class="nav-item ms-4 me-4">
-          <a class="nav-link" style=" color: white;" routerLink="products"  routerLinkActive="bg-secondary-subtle text-dark rounded fw-bold">Products</a>
+          <a class="nav-link  pt-3 pb-3" style=" color: white;" routerLink="products"  routerLinkActive="navLinkActive fw-bold">Products</a>
         </li>
         <li class="nav-item ms-4 me-4">
-          <a class="nav-link" style=" color: white;" routerLink="contact"  routerLinkActive="bg-secondary-subtle text-dark rounded fw-bold">Contact Us</a>
+          <a class="nav-link  pt-3 pb-3" style=" color: white;" routerLink="contact"  routerLinkActive="navLinkActive fw-bold">Contact Us</a>
+        </li>
+        <li class="nav-item ms-4 me-4">
+          <a class="nav-link  pt-3 pb-3" style=" color: white;" routerLink="signin"  routerLinkActive="navLinkActive fw-bold">Sign in</a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

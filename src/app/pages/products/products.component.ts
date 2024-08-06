@@ -17,8 +17,9 @@ import { TopRatedProductsComponent } from "../../components/top-rated-products/t
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   products: Array<Product> = [];
-  limit: number = 8;
+  limit: number = 7;
   skip: number = 0;
+  hasMoreData: boolean = true;
 
   private subscription!: Subscription;
   constructor(private _getProducts: ProductsService) {}
@@ -34,14 +35,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.subscription = this._getProducts.getStreamOfProducts(this.limit,this.skip).subscribe({
       next: (res) => {
         this.products = [...this.products, ...res.products];
-        // console.log(res);
+        // console.log(this.products);
         this.skip += this.limit;
+        this.hasMoreData = res.products.length === this.limit;
       },
       error: (err) => {
         console.log(err);
       },
       complete: () => {
-        console.log("All Done");
+        console.log("Got Products");
       },
     });
 

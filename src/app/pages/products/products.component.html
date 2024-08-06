@@ -13,10 +13,11 @@
       }
     </div>
     <div class="text-center p-2 m-3">
-      <button class="btn btn-danger fs-5 ps-5 pe-5" (click)="getStreamOfData()">See More</button>
+      @if (hasMoreData) {
+        <button class="btn btn-danger fs-5 ps-5 pe-5" (click)="getStreamOfData()">See More</button>
+      }
     </div>
   </div>
-
 } @placeholder () {
   <div class="text-center m-5 p-5">
     <span class="loader"></span>

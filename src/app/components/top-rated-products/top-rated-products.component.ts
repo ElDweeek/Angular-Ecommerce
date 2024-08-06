@@ -26,13 +26,13 @@
       this.subscription = this._productService.getProductsByCategory(this.category).subscribe({
         next: (res) => {
           this.topProducts = res;
-          console.log(res);
+          // console.log(res);
         },
         error: (err) => {
           console.log(err);
         },
         complete: () => {
-          console.log("All Done");
+          console.log("Top Products Done");
         },
       });
     }

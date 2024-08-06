@@ -5,6 +5,7 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { Err404Component } from './pages/err404/err404.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { SigninSignupComponent } from './pages/signin-signup/signin-signup.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
   {
     path: 'products/:id',
     component: ProductDetailsComponent
+  },
+  {
+    path: 'signin',
+    component: SigninSignupComponent
   },
 
 
