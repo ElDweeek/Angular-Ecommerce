@@ -1,11 +1,94 @@
 <div class="container pt-5">
   <div class="row">
-    <div *ngIf="isLoading">Loading...</div>
-    <div *ngIf="!isLoading && products.length === 0">No products found.</div>
-    @for (product of products; track product) {
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12 mx-auto">
-      <single-product [product]="product" ></single-product>
+    @if(isLoading){
+    <loader></loader>
+    }
+    @if (!isLoading && products.length === 0) {
+    <div>No products found.</div>
+    }
+
+
+
+    <p-carousel [value]="categories" [numVisible]="5" [numScroll]="3" [circular]="true"
+      [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
+      <ng-template let-category pTemplate="item">
+        <div class="border rounded m-2 p-3">
+          <div class="mb-3">
+            <div class="position-relative mx-auto">
+              <img src="{{ category.image }}"
+                alt="{{category.name}}" class="img-fluid w-100 border-round" style="height: 150px;" />
+
+            </div>
+          </div>
+          <div class="mb-3 fs-6 text-center">
+            {{ category.name }}
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+
+
+
+
+    <div class="bg-dark text-white p-3 d-flex justify-content-between justify-content-lg-center align-items-center flex-wrap mt-4 mb-4">
+      <div class="font-weight-bold me-5">🔥 Hot Deals!</div>
+      <div class="d-none d-lg-flex align-items-center">
+          <span class="lh-1">Libero voluptatum atque exercitationem praesentium provident odit.</span>
       </div>
+      <a class="d-flex align-items-center ms-4 me-5 text-white" href="#">
+          <span class="text-decoration-underline font-weight-bold">Learn More</span>
+      </a>
+      <button class="btn btn-dark border-0 rounded-circle d-flex align-items-center justify-content-center" style="width: 2rem; height: 2rem;">
+          <i class="pi pi-times"></i>
+      </button>
+  </div>
+
+
+
+
+
+
+
+    <p-carousel [value]="brands" [numVisible]="5" [numScroll]="3" [circular]="true"
+      [responsiveOptions]="responsiveOptions" autoplayInterval="3000">
+      <ng-template let-brand pTemplate="item">
+        <div class="border rounded m-2 p-3">
+          <div class="mb-3">
+            <div class="position-relative mx-auto">
+              <img src="{{ brand.image }}"
+                alt="{{brand.name}}" class="img-fluid w-100 border-round" style="height: 150px;" />
+
+            </div>
+          </div>
+          <div class="mb-3 fs-6 text-center">
+            {{ brand.name }}
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+
+
+    <div class="bg-dark text-white p-3 d-flex justify-content-between justify-content-lg-center align-items-center flex-wrap mt-4 mb-4">
+      <div class="font-weight-bold me-5">🔥 Hot Deals!</div>
+      <div class="d-none d-lg-flex align-items-center">
+          <span class="lh-1">Libero voluptatum atque exercitationem praesentium provident odit.</span>
+      </div>
+      <a class="d-flex align-items-center ms-4 me-5 text-white" href="#">
+          <span class="text-decoration-underline font-weight-bold">Learn More</span>
+      </a>
+      <button class="btn btn-dark border-0 rounded-circle d-flex align-items-center justify-content-center" style="width: 2rem; height: 2rem;">
+          <i class="pi pi-times"></i>
+      </button>
+  </div>
+
+
+
+
+    <h1>All Products</h1>
+    @for (product of products; track product) {
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mx-auto">
+      <single-product [product]="product"></single-product>
+    </div>
     }
   </div>
 </div>
