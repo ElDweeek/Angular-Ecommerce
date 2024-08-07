@@ -1,0 +1,10 @@
+.card,
+.products-container {
+  background-color: #fcfcfc;
+}
+
+
+::ng-deep .p-carousel .p-carousel-prev,
+::ng-deep .p-carousel .p-carousel-next {
+  display: none !important;
+}

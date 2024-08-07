@@ -11,12 +11,13 @@ import { LoaderComponent } from "../../components/loader/loader.component";
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
-
+import { PaginatorComponent } from '../../components/paginator/paginator.component';
+import { AdsBannerComponent } from "../../components/ads-banner/ads-banner.component";
 
 @Component({
   selector: 'home',
   standalone: true,
-  imports: [SingleProductComponent, LoaderComponent, CarouselModule, ButtonModule, TagModule],
+  imports: [SingleProductComponent, LoaderComponent, CarouselModule, ButtonModule, TagModule, PaginatorComponent, AdsBannerComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -24,13 +25,23 @@ export class HomeComponent implements OnInit {
   products: Array<Product> = [];
   limit: number = 10;
   page: number = 0;
+  //---------------------
   categories: Array<Category> = [];
+  //---------------------
   brands: Array<Brand> = [];
-
+  //---------------------
+  paginatedCategories: Array<Category> = [];
+  paginatedBrands: any[] = [];
+  // paginatedProducts: any[] = [];
+  rows: number = 5;
+  currentPageCategories: number = 0;
+  currentPageBrands: number = 0;
+  //---------------------
+  categoriesHeader: string = "Our Categories"
+  brandsHeader: string = "Our Brands"
+  productsHeader: string = "All Products"
+  //---------------------
   isLoading: boolean = true;
-
-  // responsiveOptions: any[] | undefined;
-
 
   responsiveOptions = [
     {
@@ -54,6 +65,7 @@ export class HomeComponent implements OnInit {
       numScroll: 1
     }
   ];
+
   constructor(
     private _productService: ProductsService,
     private _categoryService: CategoriesService,
@@ -69,9 +81,8 @@ export class HomeComponent implements OnInit {
   getStreamOfProducts() {
     this._productService.getStreamOfProducts(this.limit, this.page).subscribe({
       next: (res) => {
-        // console.log(res);
         this.products = [...this.products, ...res.data];
-        this.page++
+        this.page++;
         this.isLoading = false;
       },
       error: (err) => {
@@ -88,30 +99,59 @@ export class HomeComponent implements OnInit {
     this._categoryService.getAllCategories().subscribe({
       next: (res) => {
         this.categories = res.data;
+        this.updatePaginatedCategories();
+        this.isLoading = false;
+
       },
       error: (err) => {
         console.log(err);
+        this.isLoading = false;
+
       },
       complete: () => {
-        console.log("Got All Categoreis");
-
+        console.log("Got All Categories");
       }
-    })
+    });
   }
 
   getAllBrands() {
     this._brandsService.getAllBrands().subscribe({
-      next:(res) => {
+      next: (res) => {
         this.brands = res.data;
+        this.isLoading = false;
+
+        this.updatePaginatedBrands();
       },
       error: (err) => {
         console.log(err);
+        this.isLoading = false;
+
       },
       complete: () => {
         console.log("Got All Brands");
-
       }
-    })
+    });
   }
 
+  paginateCategories(page: number) {
+    this.currentPageCategories = page;
+    this.updatePaginatedCategories();
+  }
+
+  updatePaginatedCategories() {
+    const start = this.currentPageCategories * this.rows;
+    const end = start + this.rows;
+    this.paginatedCategories = this.categories.slice(start, end);
+  }
+
+  paginateBrands(page: number) {
+    this.currentPageBrands = page;
+    this.updatePaginatedBrands();
+  }
+
+  updatePaginatedBrands() {
+    const start = this.currentPageBrands * this.rows;
+    const end = start + this.rows;
+    this.paginatedBrands = this.brands.slice(start, end);
+  }
 }
