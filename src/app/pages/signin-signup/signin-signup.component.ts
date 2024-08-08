@@ -98,6 +98,7 @@ export class SigninSignupComponent {
       this.isLoading = true;
       this._authorizationService.signIn(this.loginForm.value).subscribe({
         next: (res) => {
+          console.log(res);
           this.isLoading = false;
           this.loginForm.reset();
           this._authorizationService.saveUserToken(res.token, res.user.name);
@@ -111,13 +112,13 @@ export class SigninSignupComponent {
     }
   }
 
-  confirmPasswordValidator: ValidatorFn = (
-    control: AbstractControl
-  ): ValidationErrors | null => {
-    return control.value.password === control.value.confirmPassword
-      ? null
-      : { PasswordNoMatch: true };
-  };
+  // confirmPasswordValidator: ValidatorFn = (
+  //   control: AbstractControl
+  // ): ValidationErrors | null => {
+  //   return control.value.password === control.value.confirmPassword
+  //     ? null
+  //     : { PasswordNoMatch: true };
+  // };
 
   match(controlName: string, checkControlName: string): ValidatorFn {
     return (controls: AbstractControl) => {

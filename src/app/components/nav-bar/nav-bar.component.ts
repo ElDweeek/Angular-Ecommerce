@@ -15,7 +15,7 @@ export class NavBarComponent {
   username: string;
   constructor(private _authorizationService: AuthorizationService) {
     _authorizationService.loggedIn.subscribe((res) => {
-      this.username = this._authorizationService.userName;
+      // this.username = this._authorizationService.userName;
       if (res) {
         this.isLoggedIn = res ? true : false;
       } else {
