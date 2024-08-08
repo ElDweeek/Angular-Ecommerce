@@ -1,18 +1,62 @@
-<div class="signContainer" [class.sign-up-mode]="signUpClass === 'sign-up-mode'">
+<div
+  class="signContainer"
+  [class.sign-up-mode]="signUpClass === 'sign-up-mode'"
+>
   <div class="forms-signContainer">
     <div class="signin-signup">
-
-      <form action="#" class="sign-in-form">
+      <form
+        action="#"
+        class="sign-in-form"
+        [formGroup]="loginForm"
+        (ngSubmit)="login()"
+      >
         <h2 class="title">Sign in</h2>
+        @if(loginErrMsg){
+        <p class="bg-danger p-2 text-white mt-3">{{ loginErrMsg }}</p>
+        }
+        <!-- SignIn Email Validation -->
+
         <div class="input-field">
           <i class="pi pi-user"></i>
-          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="Username" formControlName="email" />
         </div>
+        @if(loginForm.get("email")?.errors && loginForm.get("email")?.touched ){
+        <div class="mt-1 mb-2">
+          @if(loginForm.get("email")?.errors["required"]){
+          <p class="mb-0 errors">Required</p>
+          }@else if (loginForm.get("email")?.errors["email"]) {
+          <p class="mb-0 errors">Invalid Email</p>
+          }
+        </div>
+        }
         <div class="input-field">
           <i class="pi pi-lock"></i>
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+          />
         </div>
-        <input type="submit" value="Login" class="btn solid" />
+        <!-- SignIn Password Validation -->
+        @if(loginForm.get("password")?.errors &&
+        loginForm.get("password")?.touched ){
+        <div class="mt-1 mb-2">
+          @if(loginForm.get("password")?.errors["required"]){
+          <p class="mb-0 errors">Required</p>
+          }@else if (loginForm.get("password")?.errors["pattern"]) {
+          <p class="mb-0 errors">
+            password must have at least 8 characters & contain a letter & a
+            number
+          </p>
+          }
+        </div>
+        }
+        <button type="submit" class="btn solid">
+          @if (isLoading) {
+          <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+          } @else{ Login}
+        </button>
+
         <p class="social-text">Or Sign in with social platforms</p>
         <div class="social-media">
           <a href="#" class="social-icon">
@@ -30,52 +74,125 @@
         </div>
       </form>
 
-      <form [formGroup]="registerForm" class="sign-up-form">
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="register()"
+        class="sign-up-form"
+      >
         <h2 class="title">Sign up</h2>
-        <div class="input-field ">
-          <i class="pi pi-user"></i>
-          <input type="text" placeholder="First name" formControlName="fName" />
-        </div>
+        <!----------- Error Box-------------->
+        @if(registerErrMsg){
+        <p class="bg-danger p-2 mt-2 text-white">{{ registerErrMsg }}</p>
+        }@else if (successRegMsg) {
+        <p class="bg-success p-2 mt-2 text-white">{{ successRegMsg }}</p>
+
+        }
+
+        <!----------- Username Validation ------------->
+
         <div class="input-field">
           <i class="pi pi-user"></i>
-          <input type="text" placeholder="Last name" formControlName="lName" />
+          <input type="text" placeholder="User name" formControlName="name" />
         </div>
-        <div class="input-field">
-          <i class="pi pi-user"></i>
-          <input type="text" placeholder="User name" formControlName="username" />
+
+        @if(registerForm.get("name")?.errors &&
+        registerForm.get("name")?.touched ){
+        <div class="mb-2 mt-0">
+          @if(registerForm.get("name")?.errors["required"]){
+          <p class="errors mb-0">Required</p>
+          }@else if (registerForm.get("name")?.errors["pattern"]) {
+          <p class="mb-0 errors">
+            Username length must be between [5-15] characters & not contain
+            special characters.
+          </p>
+          }
         </div>
+        }
+
+        <!----------- Email Validation ------------->
         <div class="input-field">
           <i class="pi pi-envelope"></i>
           <input type="email" placeholder="Email" formControlName="email" />
         </div>
+        @if(registerForm.get("email")?.errors &&
+        registerForm.get("email")?.touched ){
+        <div class="mt-1 mb-2">
+          @if(registerForm.get("email")?.errors["required"]){
+          <p class="mb-0 errors">Required</p>
+          }@else if (registerForm.get("email")?.errors["email"]) {
+          <p class="mb-0 errors">Invalid Email</p>
+          }
+        </div>
+        }
+        <!----------- Password Validation ------------->
         <div class="input-field">
           <i class="pi pi-lock"></i>
-          <input type="password" placeholder="Password" formControlName="password" />
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+          />
         </div>
+        @if(registerForm.get("password")?.errors &&
+        registerForm.get("password")?.touched ){
+        <div class="mt-1 mb-2">
+          @if(registerForm.get("password")?.errors["required"]){
+          <p class="mb-0 errors">Required</p>
+          }@else if (registerForm.get("password")?.errors["pattern"]) {
+          <p class="mb-0 errors">
+            password must have at least 8 characters & contain a letter & a
+            number
+          </p>
+          }
+        </div>
+        }
         <div class="input-field">
           <i class="pi pi-lock"></i>
-          <input type="password" placeholder="Confirm Password" />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            formControlName="rePassword"
+          />
         </div>
-
-        <div class="checkbox-field">
-
-          <div class="male">
-            <input type="radio" id="male" value="male" formControlName="gender">
-            <span>Male</span>
-            <i class="pi pi-mars"></i>
-          </div>
-
-          <div class="female">
-            <input type="radio" id="female" value="female" formControlName="gender">
-            <span>Female</span>
-            <i class="pi pi-venus"></i>
-          </div>
-
+        @if(registerForm.get("rePassword")?.errors &&
+        registerForm.get("rePassword")?.touched ){
+        <div class="mt-1 mb-2">
+          @if(registerForm.get("rePassword")?.errors["required"]){
+          <p class="mb-0 errors">Required</p>
+          }@if (registerForm.errors?.['matching']) {
+          <p class="mb-0 errors">Password does not match</p>
+          }
         </div>
+        }
+        <!----------- phone Validtion --------->
+        <div class="input-field">
+          <i class="pi pi-phone"></i>
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            formControlName="phone"
+          />
+        </div>
+        @if(registerForm.get("phone")?.errors &&
+        registerForm.get("phone")?.touched ){
+        <div class="mb-2 mt-1">
+          @if(registerForm.get("phone")?.errors["required"]){
+          <p class="mb-0 errors">Required</p>
+          }@else if
+          (registerForm.get("phone")?.errors["minlength"]||registerForm.get("phone")?.errors["maxlength"])
+          {
+          <p class="mb-0 errors">Phone Number length must be 11 number only</p>
+          }
+        </div>
+        }
+        <button type="submit" class="btn">
+          @if (isLoading) {
+          <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+          } @else{ Sign Up}
+        </button>
 
-        <input type="submit" class="btn" value="Sign up" />
         <p class="social-text">Or Sign up with social platforms</p>
-        <div class="social-media">
+        <div class="social-media mb-5">
           <a href="#" class="social-icon">
             <i class="pi pi-facebook"></i>
           </a>
@@ -90,7 +207,6 @@
           </a>
         </div>
       </form>
-
     </div>
   </div>
 
@@ -99,14 +215,22 @@
       <div class="content">
         <h3>New here ?</h3>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-          ex ratione. Aliquid!
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex
+          ratione. Aliquid!
         </p>
-        <button class="btn transparent" id="sign-up-btn" (click)="addSignUpClass()">
-          Sign up
+        <button
+          class="btn transparent"
+          id="sign-up-btn"
+          (click)="addSignUpClass()"
+        >
+          Sign Up
         </button>
       </div>
-      <img src="https://i.ibb.co/6HXL6q1/Privacy-policy-rafiki.png" class="image" alt="" />
+      <img
+        src="https://i.ibb.co/6HXL6q1/Privacy-policy-rafiki.png"
+        class="image"
+        alt=""
+      />
     </div>
     <div class="panel right-panel">
       <div class="content">
@@ -115,11 +239,19 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
           laboriosam ad deleniti.
         </p>
-        <button class="btn transparent" id="sign-in-btn" (click)="removeSignUpClass()">
+        <button
+          class="btn transparent"
+          id="sign-in-btn"
+          (click)="removeSignUpClass()"
+        >
           Sign in
         </button>
       </div>
-      <img src="https://i.ibb.co/nP8H853/Mobile-login-rafiki.png" class="image" alt="" />
+      <img
+        src="https://i.ibb.co/nP8H853/Mobile-login-rafiki.png"
+        class="image"
+        alt=""
+      />
     </div>
   </div>
 </div>

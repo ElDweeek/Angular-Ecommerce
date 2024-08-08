@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './err404.component.html',
-  styleUrl: './err404.component.scss'
+  styleUrl: './err404.component.scss',
 })
-export class Err404Component {
-
-}
+export class Err404Component {}

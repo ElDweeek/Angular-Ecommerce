@@ -6,50 +6,45 @@ import { ProductsComponent } from './pages/products/products.component';
 import { Err404Component } from './pages/err404/err404.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SigninSignupComponent } from './pages/signin-signup/signin-signup.component';
+import { UserSettingComponent } from './components/user-setting/user-setting.component';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: '/home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'about',
-    component: AboutComponent
+    component: AboutComponent,
   },
   {
     path: 'contact',
-    component: ContactUsComponent
+    component: ContactUsComponent,
   },
   {
     path: 'products',
-    component: ProductsComponent
+    component: ProductsComponent,
   },
   {
     path: 'products/:id',
-    component: ProductDetailsComponent
+    component: ProductDetailsComponent,
+  },
+  {
+    path: 'settings',
+    component: UserSettingComponent,
   },
   {
     path: 'signin',
-    component: SigninSignupComponent
+    component: SigninSignupComponent,
   },
 
-
-
-
-
-
-
-
-
-
-
   {
-    path: "**",
-    component: Err404Component
-  }
+    path: '**',
+    component: Err404Component,
+  },
 ];
