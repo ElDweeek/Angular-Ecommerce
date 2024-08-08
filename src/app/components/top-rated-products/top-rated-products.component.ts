@@ -3,17 +3,20 @@
   import { Product } from '../../interfaces/product/product.interface';
   import { ProductsService } from '../../services/products/products.service';
   import { Subscription } from 'rxjs';
+import { LoaderComponent } from "../loader/loader.component";
 
   @Component({
     selector: 'top-rated-products',
     standalone: true,
-    imports: [SingleProductComponent],
+    imports: [SingleProductComponent, LoaderComponent],
     templateUrl: './top-rated-products.component.html',
     styleUrl: './top-rated-products.component.scss'
   })
   export class TopRatedProductsComponent implements OnInit, OnDestroy {
     topProducts!: Array<Product>
-    category: string = "womens-jewellery"
+    category: string = "Electronics"
+    isLoading: boolean = true;
+
 
     private subscription!: Subscription;
     constructor(private _productService: ProductsService) { }
@@ -26,10 +29,13 @@
       this.subscription = this._productService.getProductsByCategory(this.category).subscribe({
         next: (res) => {
           this.topProducts = res;
+          this.isLoading = false
           // console.log(res);
         },
         error: (err) => {
           console.log(err);
+          this.isLoading = false
+
         },
         complete: () => {
           console.log("Top Products Done");

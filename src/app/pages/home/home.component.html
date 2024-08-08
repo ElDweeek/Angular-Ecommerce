@@ -1,11 +1,89 @@
 <div class="container pt-5">
-  <div class="row">
-    <div *ngIf="isLoading">Loading...</div>
-    <div *ngIf="!isLoading && products.length === 0">No products found.</div>
-    @for (product of products; track product) {
+  @if(isLoading){
+  <loader></loader>
+  }
+  @if (!isLoading && products.length === 0) {
+  <div>No products found.</div>
+  }
+
+  <h3 class="text-center bg-body-secondary p-3 mt-5 mb-3">{{categoriesHeader}}</h3>
+  <div class="card">
+    <p-carousel [value]="paginatedCategories" [numVisible]="5" [numScroll]="3" [circular]="false"
+      [responsiveOptions]="responsiveOptions" autoplayInterval="3000" [showIndicators]="false">
+      <ng-template let-category pTemplate="item">
+        <div class="border rounded m-2 p-3">
+          <div class="mb-3">
+            <div class="position-relative mx-auto">
+              <img src="{{ category.image }}" alt="{{category.name}}" class="img-fluid w-100 border-round"
+                style="height: 150px;" />
+            </div>
+          </div>
+          <div class="mb-3 fs-6 text-center text-truncate">
+            {{ category.name }}
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+
+    <div class="mt-3">
+      <paginator [rows]="rows" [totalRecords]="categories.length" (pageChange)="paginateCategories($event)">
+      </paginator>
+    </div>
+  </div>
+
+
+
+  <ads-banner></ads-banner>
+
+
+
+
+  <h3 class="text-center bg-body-secondary p-3 mt-5 mb-3">{{brandsHeader}}</h3>
+  <div class="card">
+    <p-carousel [value]="paginatedBrands" [numVisible]="5" [numScroll]="3" [circular]="false"
+      [responsiveOptions]="responsiveOptions" autoplayInterval="3000" [showIndicators]="false">
+      <ng-template let-category pTemplate="item">
+        <div class="border rounded m-2 p-3">
+          <div class="mb-3">
+            <div class="position-relative mx-auto">
+              <img src="{{ category.image }}" alt="{{category.name}}" class="img-fluid w-100 border-round"
+                style="height: 150px;" />
+            </div>
+          </div>
+          <div class="mb-3 fs-6 text-center  text-truncate">
+            {{ category.name }}
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+    <div class="mt-3">
+
+      <paginator [rows]="rows" [totalRecords]="brands.length" (pageChange)="paginateBrands($event)">
+      </paginator>
+    </div>
+  </div>
+
+
+  <ads-banner></ads-banner>
+
+
+
+
+  <h3 class="text-center bg-body-secondary p-3 mt-5 mb-3">{{productsHeader}}</h3>
+  <div class="container products-container">
+    <div class="row">
+
+      @for (product of products; track product) {
       <div class="col-lg-3 col-md-4 col-sm-6 col-12 mx-auto">
-      <single-product [product]="product" ></single-product>
+        <single-product [product]="product"></single-product>
       </div>
-    }
+      }
+      <div class="mt-3">
+
+        <paginator [rows]="10" [totalRecords]="120" (pageChange)="10">
+        </paginator>
+      </div>
+    </div>
+
   </div>
 </div>
