@@ -7,6 +7,7 @@ import { Err404Component } from './pages/err404/err404.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SigninSignupComponent } from './pages/signin-signup/signin-signup.component';
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
+import { CartComponent } from './pages/Cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,10 @@ export const routes: Routes = [
   {
     path: 'signin',
     component: SigninSignupComponent,
+  },
+  {
+    path: 'cart',
+    component:CartComponent ,
   },
 
   {

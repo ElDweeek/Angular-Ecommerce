@@ -69,7 +69,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private _productService: ProductsService,
     private _categoryService: CategoriesService,
-    private _brandsService: BrandsService
+    private _brandsService: BrandsService,
+
   ) { }
 
   ngOnInit(): void {
@@ -154,4 +155,10 @@ export class HomeComponent implements OnInit {
     const end = start + this.rows;
     this.paginatedBrands = this.brands.slice(start, end);
   }
+
+
+
+
+
+
 }
