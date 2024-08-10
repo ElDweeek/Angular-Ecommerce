@@ -9,8 +9,8 @@ import { PaginatorModule } from 'primeng/paginator';
   styleUrl: './paginator.component.scss'
 })
 export class PaginatorComponent {
-  @Input() rows: number = 5;
-  @Input() totalRecords: number = 0;
+  @Input() rows!: number
+  @Input() totalRecords!: number
   @Output() pageChange = new EventEmitter<number>();
 
   onPageChange(event: any) {

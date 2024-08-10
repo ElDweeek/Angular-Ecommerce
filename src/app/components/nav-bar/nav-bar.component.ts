@@ -12,7 +12,7 @@ import { AuthorizationService } from '../../services/users/authorization.service
 export class NavBarComponent {
   Logo = 'assets/images/LOGO.png';
   isLoggedIn = false;
-  username: string;
+  username!: string;
   constructor(private _authorizationService: AuthorizationService) {
     _authorizationService.loggedIn.subscribe((res) => {
       this.username = this._authorizationService.userName;
