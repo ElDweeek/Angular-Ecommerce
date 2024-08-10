@@ -8,6 +8,7 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { SigninSignupComponent } from './pages/signin-signup/signin-signup.component';
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { CartComponent } from './pages/Cart/cart.component';
+import { WishListComponent } from './pages/wish-list/wish-list.component';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,10 @@ export const routes: Routes = [
   {
     path: 'cart',
     component:CartComponent ,
+  },
+  {
+    path: 'wish-list',
+    component:WishListComponent ,
   },
 
   {

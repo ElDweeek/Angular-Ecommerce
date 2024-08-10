@@ -83,7 +83,6 @@ export class SigninSignupComponent {
         },
         error: (err) => {
           console.log(err);
-
           this.registerErrMsg = err.error.message;
           this.isLoading = false;
         },

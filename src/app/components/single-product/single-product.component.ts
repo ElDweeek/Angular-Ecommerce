@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products/products.service';
 import { TruncatePipe } from '../../pipes/truncate/truncate.pipe';
 import { AddProductService } from '../../services/Cart/add-product.service';
+import { AddToWishListService } from '../../services/WishList/add-to-wish-list.service';
 
 @Component({
   selector: 'single-product',
@@ -19,7 +20,7 @@ export class SingleProductComponent {
 
   // ngOnInit() {
   // }
-constructor(private _productService : ProductsService,  private _addToCartService:AddProductService) {}
+constructor(private _productService : ProductsService,  private _addToCartService:AddProductService,private _addToWishList:AddToWishListService) {}
 onViewDetails() {
   this._productService.getProductViewDetails(this.product.id);
 }
@@ -47,7 +48,22 @@ onViewDetails() {
     }
   )
   }
+  addToWishList(prodId:string){
+    this._addToWishList.addToWishList(prodId).subscribe(
+    {
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
 
+      },
+      complete: () => {
+        console.log("completed");
+      }
+    }
+  )
+  }
 
 
 }
