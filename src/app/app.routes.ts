@@ -8,7 +8,6 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { SigninSignupComponent } from './pages/signin-signup/signin-signup.component';
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { CartComponent } from './pages/Cart/cart.component';
-import { WishListComponent } from './pages/wish-list/wish-list.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +38,25 @@ export const routes: Routes = [
   {
     path: 'settings',
     component: UserSettingComponent,
+    children: [
+      // {
+      //   path: 'wishlist',
+      //   component: wishlistComponent,
+      // },
+      {
+        path: 'address',
+        component: ShippingAddressesComponent,
+      },
+      {
+        path: 'payment',
+        component: UserSettingComponent,
+      },
+      {
+        path: '',
+        redirectTo: 'settings',
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: 'signin',
@@ -46,7 +64,7 @@ export const routes: Routes = [
   },
   {
     path: 'cart',
-    component:CartComponent ,
+    component: CartComponent,
   },
   {
     path: 'wish-list',

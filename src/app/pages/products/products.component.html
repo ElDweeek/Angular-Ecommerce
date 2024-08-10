@@ -1,34 +1,77 @@
 <top-rated-products></top-rated-products>
 
-@defer (on interaction()) {
-<div class="container">
-  <h3 class="text-center bg-body-secondary p-3 mt-5 mb-3">All Products</h3>
 
-  @if(isLoading) {
-  <loader></loader>
-  }
-  @if(!isLoading && products.length ===0) {
-  <div class="text-center fs-3">No Products Found</div>
-  }
 
-  <div class="row pb-3">
-    @for (product of products; track product) {
-    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mx-auto">
-      <single-product [product]="product"></single-product>
+<h3 class="text-center bg-body-secondary p-3 mt-5 mb-3">{{productsHeader}}</h3>
+
+<div class="container products-container">
+  <div class="row">
+
+    <div class="col-lg-3 col-md-4 col-sm-12 ">
+      <div class="filteration card pb-1 mt-3">
+        <h5 class="bg-primary text-white p-3">Filter Options</h5>
+        <ul class="ps-3 pe-3">
+
+          <input class="form-control" type="text" [(ngModel)]="searchTerm" (input)="onSearchChange($event)"
+            placeholder="Search for a product">
+            @if(filteredProducts && filteredProducts.length > 0){
+              <ul class="searching-list card ">
+                <li *ngFor="let product of filteredProducts" (click)="selectProduct(product)" class="border-bottom">
+                  {{ product.title }}
+                </li>
+              </ul>
+            }
+
+
+
+          <li class="border-bottom" (click)="sortByNameAtoZ()">
+            <i class="pi pi-sort-alpha-down"></i>
+            <span>Sort: <span>A</span> ⋙ <span>Z</span></span>
+          </li>
+          <li class="border-bottom" (click)="sortByNameZtoA()">
+            <i class="pi pi-sort-alpha-down-alt"></i>
+            <span>Sort: <span>Z</span> ⋙ <span>A</span></span>
+          </li>
+          <li class="border-bottom" (click)="sortByPriceLowtoHigh()">
+            <i class="pi pi-sort-amount-up-alt"></i>
+            <span>Sort: <span>Low</span> ⋙ <span>High</span></span>
+          </li>
+          <li class="border-bottom" (click)="sortByPriceHightoLow()">
+            <i class="pi pi-sort-amount-down-alt"></i>
+            <span>Sort: <span>High</span> ⋙ <span>Low</span></span>
+          </li>
+          <li>
+            <p class="mb-3">✂ Sort by price range</p>
+            <div>
+              <p-slider [(ngModel)]="rangeValues" [range]="true" [min]="minPrice" [max]="maxPrice"
+                styleClass="bg-info-subtle p-1"></p-slider>
+              <p class="fs-6 text-black-50 d-flex justify-content-evenly">
+                <span>{{rangeValues[0]}}</span>
+                <i class="pi pi-arrow-right-arrow-left"></i>
+                <span>{{rangeValues[1]}}</span>
+              </p>
+              <button type="button" (click)="filterProductsByPrice()"
+                class="btn btn-outline-primary ms-auto d-block">Search</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    @defer () {
+    <div class="col-lg-9 col-md-8 col-sm-12 container">
+      <div class="row">
+        @for (product of paginatedProducts; track product) {
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mx-auto">
+          <single-product [product]="product"></single-product>
+        </div>
+        }
+        <div class="mt-3">
+          <paginator [rows]="rows" [totalRecords]="products.length" (pageChange)="paginateProducts($event)">
+          </paginator>
+        </div>
+      </div>
     </div>
     }
   </div>
-  <div class="text-center p-2 m-3">
-    @if (hasMoreData) {
-    <button class="btn btn-danger fs-5 ps-5 pe-5" (click)="getStreamOfData()">See More</button>
-    }
-  </div>
+
 </div>
-} @placeholder () {
-<div class="text-center m-5 p-5">
-  <span class="loader"></span>
-  <p class="fs-5 m-3">Check the pan to load all Products</p>
-</div>
-} @error {
-<p>An loading error occurred</p>
-}

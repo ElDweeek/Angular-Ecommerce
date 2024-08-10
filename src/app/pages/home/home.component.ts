@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CategoriesService } from '../../services/category/categories.service';
 import { BrandsService } from '../../services/brand/brands.service';
 import { ProductsService } from '../../services/products/products.service';
@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { PaginatorComponent } from '../../components/paginator/paginator.component';
 import { AdsBannerComponent } from "../../components/ads-banner/ads-banner.component";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'home',
@@ -21,10 +22,11 @@ import { AdsBannerComponent } from "../../components/ads-banner/ads-banner.compo
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   products: Array<Product> = [];
   limit: number = 10;
-  page: number = 0;
+  page: number = 1;
+  hasMoreData: boolean = true;
   //---------------------
   categories: Array<Category> = [];
   //---------------------
@@ -66,11 +68,11 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  private _subscription!: Subscription
   constructor(
     private _productService: ProductsService,
     private _categoryService: CategoriesService,
     private _brandsService: BrandsService,
-
   ) { }
 
   ngOnInit(): void {
@@ -80,21 +82,29 @@ export class HomeComponent implements OnInit {
   }
 
   getStreamOfProducts() {
-    this._productService.getStreamOfProducts(this.limit, this.page).subscribe({
+
+    this._subscription = this._productService.getStreamOfProducts(this.limit, this.page).subscribe({
       next: (res) => {
         this.products = [...this.products, ...res.data];
-        this.page++;
         this.isLoading = false;
+
+        this.page++;
+        this.hasMoreData = res.data.length === this.limit;
+
+        // console.log(this.products);
       },
       error: (err) => {
         console.log(err);
         this.isLoading = false;
+
       },
       complete: () => {
-        console.log('Got New 10 Products');
-      }
+        console.log("Got Products");
+      },
     });
+
   }
+
 
   getAllCategories() {
     this._categoryService.getAllCategories().subscribe({
@@ -157,7 +167,11 @@ export class HomeComponent implements OnInit {
   }
 
 
-
+  ngOnDestroy() {
+    if (this._subscription) {
+      this._subscription.unsubscribe();
+    }
+  }
 
 
 

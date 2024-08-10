@@ -6,10 +6,15 @@ import { TruncatePipe } from '../../pipes/truncate/truncate.pipe';
 import { AddProductService } from '../../services/Cart/add-product.service';
 import { AddToWishListService } from '../../services/WishList/add-to-wish-list.service';
 
+import { AddToWishListService } from '../../services/WishList/add-to-wish-list.service';
+
+import { LoaderComponent } from "../loader/loader.component";
+
+
 @Component({
   selector: 'single-product',
   standalone: true,
-  imports: [TruncatePipe,RouterLink],
+  imports: [TruncatePipe, RouterLink, LoaderComponent],
   templateUrl: './single-product.component.html',
   styleUrl: './single-product.component.scss'
 })
