@@ -6,7 +6,6 @@ import { TruncatePipe } from '../../pipes/truncate/truncate.pipe';
 import { AddProductService } from '../../services/Cart/add-product.service';
 import { AddToWishListService } from '../../services/WishList/add-to-wish-list.service';
 
-import { AddToWishListService } from '../../services/WishList/add-to-wish-list.service';
 
 import { LoaderComponent } from "../loader/loader.component";
 
