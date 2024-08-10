@@ -1,8 +1,48 @@
-<div>
-  <div>Favourite Products</div>
-  <div><button>Add Shipping Address</button></div>
-  <div><button>Change Password</button></div>
-  <div>
-    <button class="btn mt-5 bg-warning" (click)="logOut()">Logout</button>
+<div class="row mt-4">
+  <div class="col-md-2" (click)="links($event)">
+    <ul class="list-group list-group-flush text-center">
+      <li>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action list-group-item-warning active mb-2"
+          aria-current="true"
+        >
+          Wishlist
+        </a>
+      </li>
+      <li>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action list-group-item-warning mb-2"
+          routerLink="../products"
+          >Products</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action list-group-item-warning mb-2"
+          routerLink="address"
+          >Shipping Addresses</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action list-group-item-warning"
+          >Change Your Password</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-1">
+    <div class="vr"></div>
+  </div>
+
+  <div class="col-md-8">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="col-md-1">
+    <button class="btn bg-warning" (click)="logOut()">Logout</button>
   </div>
 </div>

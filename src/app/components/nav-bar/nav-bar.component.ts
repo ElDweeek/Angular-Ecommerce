@@ -13,11 +13,17 @@ export class NavBarComponent {
   Logo = 'assets/images/LOGO.png';
   isLoggedIn = false;
   username: string;
+
   constructor(private _authorizationService: AuthorizationService) {
     _authorizationService.loggedIn.subscribe((res) => {
-      // this.username = this._authorizationService.userName;
       if (res) {
         this.isLoggedIn = res ? true : false;
+        this.username = localStorage
+          .getItem('username')
+          .split('')
+          .slice(1, 3)
+          .join('')
+          .toUpperCase();
       } else {
         this.isLoggedIn = false;
       }
