@@ -58,7 +58,7 @@
     </p-carousel>
     <div class="mt-3">
 
-      <paginator [rows]="rows" [totalRecords]="brands.length" (pageChange)="paginateBrands($event)">
+      <paginator [rows]="rows" [totalRecords]="brands.length" (pageChange)="paginateBrands($event)" >
       </paginator>
     </div>
   </div>
@@ -67,23 +67,39 @@
   <ads-banner></ads-banner>
 
 
+</div>
 
 
-  <h3 class="text-center bg-body-secondary p-3 mt-5 mb-3">{{productsHeader}}</h3>
-  <div class="container products-container">
-    <div class="row">
 
-      @for (product of products; track product) {
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12 mx-auto">
-        <single-product [product]="product"></single-product>
-      </div>
-      }
-      <div class="mt-3">
+@defer (on interaction()) {
+<div class="container">
+  <h3 class="text-center bg-body-secondary p-3 mt-5 mb-3">All Products</h3>
 
-        <paginator [rows]="10" [totalRecords]="120" (pageChange)="10">
-        </paginator>
-      </div>
+  @if(isLoading) {
+  <loader></loader>
+  }
+  @if(!isLoading && products.length ===0) {
+  <div class="text-center fs-3">No Products Found</div>
+  }
+
+  <div class="row pb-3">
+    @for (product of products; track product) {
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mx-auto">
+      <single-product [product]="product"></single-product>
     </div>
-
+    }
+  </div>
+  <div class="text-center p-2 m-3">
+    @if (hasMoreData) {
+    <button class="btn btn-danger fs-5 ps-5 pe-5" (click)="getStreamOfProducts()">See More</button>
+    }
   </div>
 </div>
+} @placeholder () {
+<div class="text-center m-5 p-5">
+  <loader></loader>
+  <p class="fs-5 m-3">Check the pan to load all Products</p>
+</div>
+} @error {
+<p>An loading error occurred</p>
+}
