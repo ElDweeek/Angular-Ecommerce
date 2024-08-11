@@ -40,6 +40,7 @@ export class AuthorizationService {
       data
     );
   }
+
   saveUserToken(token: string, username: string) {
     if (this.isBrowser) {
       localStorage.setItem('token', JSON.stringify(token));
@@ -63,6 +64,14 @@ export class AuthorizationService {
     });
     const url = `https://ecommerce.routemisr.com/api/v1/addresses`;
     return this.httpClient.post(url, address, { headers });
+  }
+  getUserCurrentPass(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      token: this.token,
+    });
+
+    const url = `https://ecommerce.routemisr.com/api/v1/users/changeMyPassword`;
+    return this.httpClient.put(url, data, { headers });
   }
   removeAddress(addressId): Observable<any> {
     const headers = new HttpHeaders({

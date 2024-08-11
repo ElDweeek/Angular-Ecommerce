@@ -1,3 +1,4 @@
+<!-- 
 <div class="row mt-4">
   <div class="col-md-2" (click)="links($event)">
     <ul class="list-group list-group-flush text-center">
@@ -30,19 +31,107 @@
         <a
           href="#"
           class="list-group-item list-group-item-action list-group-item-warning"
+          routerLink="updatePassword"
           >Change Your Password</a
         >
       </li>
     </ul>
   </div>
   <div class="col-md-1">
-    <div class="vr"></div>
+    <div class="vr"></div> -->
+
+<!-- <div id="mycontainer">
+
+  <div class="row mt-4">
+    <div class="col-md-3" (click)="links($event)">
+      <ul class="list-group list-group-flush text-center">
+        <li>
+          <a href="#" class="list-group-item list-group-item-action list-group-item-warning active mb-2"
+            aria-current="true">
+            Wishlist
+          </a>
+        </li>
+        <li>
+          <a href="#" class="list-group-item list-group-item-action list-group-item-warning mb-2"
+            routerLink="../products">Products</a>
+        </li>
+        <li>
+          <a href="#" class="list-group-item list-group-item-action list-group-item-warning mb-2"
+            routerLink="address">Shipping Addresses</a>
+        </li>
+        <li>
+          <a href="#" class="list-group-item list-group-item-action list-group-item-warning">Change Your Password</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="col-md-8">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-md-1">
+      <button class="btn bg-warning" (click)="logOut()">Logout</button>
+    </div>
+
   </div>
 
-  <div class="col-md-8">
-    <router-outlet></router-outlet>
-  </div>
-  <div class="col-md-1">
-    <button class="btn bg-warning" (click)="logOut()">Logout</button>
-  </div>
+</div> -->
+
+<div class="card position-absolute">
+  <p-sidebar [(visible)]="sidebarVisible">
+    <div class="d-flex">
+      <img
+        src="assets/images/shopping-cart.png"
+        style="width: 40px; height: 40px"
+        alt=""
+      />
+      <h3 class="ms-2 mb-5">User Settings</h3>
+    </div>
+    <ul class="list-group list-group-flush text-center" (click)="links($event)">
+      <li>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action list-group-item-warning active mb-2"
+          aria-current="true"
+          routerLink="wish-list"
+        >
+          Your Wishlist
+        </a>
+      </li>
+      <li>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action list-group-item-warning mb-2"
+          routerLink="cart"
+          >Your Cart</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action list-group-item-warning mb-2"
+          routerLink="address"
+          >Shipping Addresses</a
+        >
+      </li>
+      <li>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action list-group-item-warning mb-2"
+          routerLink="updatePassword"
+          >Change Your Password</a
+        >
+      </li>
+      <li
+        class="list-group-item list-group-item-action list-group-item-warning"
+      >
+        <button class="btn bg-warning w-100" (click)="logOut()">Logout</button>
+      </li>
+    </ul>
+  </p-sidebar>
+  <p-button (onClick)="sidebarVisible = true" icon="pi pi-arrow-right" />
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
 </div>

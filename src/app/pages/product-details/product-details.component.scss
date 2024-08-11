@@ -216,3 +216,10 @@ img {
 		transform: scale(0.97);
 	}
 }
+
+
+:host ::ng-deep .p-rating .p-rating-item .p-rating-icon {
+  color: gold;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  font-size: 1.143rem;
+}

@@ -1,18 +1,18 @@
 <div class="row mt-4">
-  <div class="col-md-10">
+  <div class="col-lg-9 col-md-8 col-12 mt-5">
     <form [formGroup]="form">
       <div formArrayName="contacts">
+        @if(successMsg){
+        <p class="bg-success p-2 mt-2 text-white">{{ successMsg }}</p>
+        }@else if (failedMsg) {
+        <p class="bg-danger p-2 mt-2 text-white">{{ failedMsg }}</p>
+        }
         <div
           *ngFor="let contact of contacts.controls; let i = index"
           [formGroupName]="i"
         >
           <fieldset>
             <legend class="fw-bold">Address Information</legend>
-            @if(successMsg){
-            <p class="bg-success p-2 mt-2 text-white">{{ successMsg }}</p>
-            }@else if (failedMsg) {
-            <p class="bg-danger p-2 mt-2 text-white">{{ failedMsg }}</p>
-            }
             <div class="form-outline form-white">
               <input
                 type="text"
@@ -23,15 +23,6 @@
                 >Address</label
               >
             </div>
-            <!-- 
-            <div class="form-outline form-white">
-              <input
-                type="text"
-                formControlName="details"
-                class="form-control form-control-lg"
-              />
-              <label class="form-label">Country</label>
-            </div> -->
 
             <div id="demo-form">
               <p class="field--wrapper">
@@ -330,7 +321,7 @@
             <button
               type="button"
               (click)="removeAddress(i)"
-              class="btn btn-danger mt-2"
+              class="btn btn-danger mt-3"
             >
               Remove Address
             </button>
@@ -340,21 +331,25 @@
       </div>
     </form>
   </div>
-  <div class="col-md-2">
-    <div class="position-absolute mt-5">
+  <div class="col-lg-3 col-md-4 col-12 mt-5">
+    <div class="mt-5">
       <button
         type="button"
         (click)="addAddress()"
-        class="btn button-52 mb-3"
+        class="btn button-52 mb-3 ms-2 me-2"
         role="button"
       >
         Add Address
       </button>
-      <button type="button" (click)="addUserAddress()" class="btn button-52">
+      <button
+        type="button"
+        (click)="addUserAddress()"
+        class="btn button-52 ms-2 me-2"
+      >
         Save Address
       </button>
     </div>
-    <div class="position-absolute bottom-50">
+    <div class="bottom-50 mt-4">
       <button
         type="button"
         (click)="deleteAddresses()"
@@ -363,5 +358,14 @@
         Delete Address
       </button>
     </div>
+    <!-- <div class="bottom-50 mt-4">
+      <button
+        type="button"
+        (click)="getAddresses()"
+        class="btn button-53 text-white"
+      >
+        Get Address
+      </button>
+    </div> -->
   </div>
 </div>

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products/products.service';
 import { Product } from '../../interfaces/product/product.interface';
 import { AddProductService } from '../../services/Cart/add-product.service';
+import { FormsModule } from '@angular/forms';
+import { RatingModule } from 'primeng/rating';
 import { AddToWishListService } from '../../services/WishList/add-to-wish-list.service';
 import { CartCountService } from '../../services/Cart/cart-count.service';
 import { MessageService } from 'primeng/api';
@@ -11,7 +13,7 @@ import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'product-details',
   standalone:true,
-  imports:[ToastModule],
+  imports:[ToastModule,FormsModule,RatingModule],
   providers:[MessageService],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
@@ -61,13 +63,14 @@ export class ProductDetailsComponent implements OnInit {
       error: (err) => {
         console.log(err);
 
-      },
-      complete: () => {
-        console.log("completed");
+        },
+        complete: () => {
+          console.log("completed");
+        }
       }
-    }
-  )
+    )
   }
+
   addToWishList(prodId:string){
     this._addToWishList.addToWishList(prodId).subscribe(
     {
@@ -84,5 +87,10 @@ export class ProductDetailsComponent implements OnInit {
       }
     }
   )
+  }
+
+
+  changeImageCover(image: string) {
+    this.product.imageCover = image;
   }
 }

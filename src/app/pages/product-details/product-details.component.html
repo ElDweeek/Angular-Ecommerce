@@ -9,12 +9,12 @@
               <i class="material-icons pi pi-share-alt p-2"></i>
               <i class="material-icons pi pi-heart-fill p-2" (click)="addToWishList(product.id)"></i>
             </div>
-            <img src="{{product?.imageCover}}" alt="{{product?.title}}">
+            <img [src]="product?.imageCover" alt="{{product?.title}}">
           </div>
           <div class="photo-album">
             <ul>
               @for(image of product?.images; track image) {
-                <li><img src="{{image}}"></li>
+                <li><img src="{{image}}" role="button" (click)="changeImageCover(image)"></li>
               }
             </ul>
           </div>
@@ -29,7 +29,11 @@
       <div class="product__info">
         <div class="title">
           <h1>{{product?.title}}</h1>
-          <span>{{product?.ratingsAverage}}</span>
+          <div class="d-flex align-items-center mt-3">
+            <p class="text-black-50 me-4 mb-0">Rating: {{product?.ratingsAverage}}</p>
+            <p-rating [ngModel]="product?.ratingsAverage" [cancel]="false" [stars]="5" [disabled]="true"></p-rating>
+            <p class="text-black-50 ms-4 mb-0">{{product?.ratingsQuantity}} Reviews</p>
+          </div>
         </div>
         <div class="price">
           <span>{{product?.price}} </span>$
@@ -38,7 +42,7 @@
           <h3>SELECT A COLOR</h3>
           <ul>
             @for(image of product?.images; track image) {
-              <li><img src="{{image}}"></li>
+              <li><img src="{{image}}" (click)="changeImageCover(image)"></li>
             }
           </ul>
         </div>
@@ -50,19 +54,14 @@
               {{product?.description}}
             </li>
             <li>
-              <h6>brand</h6>
-              {{product?.brand?.name}}
-            </li>
-            <!-- <li>
-              <h6>weight</h6>
-              {{product?.weight}}
+              <h6>Category</h6>
+              {{product?.category.name}}
             </li>
             <li>
-              <h6>dimensions</h6>
-              <p>Width: {{product?.dimensions?.width}}</p>
-              <p>height: {{product?.dimensions?.height}}</p>
-              <p>depth: {{product?.dimensions?.depth}}</p>
-            </li> -->
+              <h6>Brand</h6>
+              {{product?.brand?.name}}
+            </li>
+
           </ul>
         </div>
 

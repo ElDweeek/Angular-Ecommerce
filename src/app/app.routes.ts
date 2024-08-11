@@ -9,6 +9,10 @@ import { SigninSignupComponent } from './pages/signin-signup/signin-signup.compo
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { CartComponent } from './pages/Cart/cart.component';
 import { ShippingAddressesComponent } from './components/shipping-addresses/shipping-addresses.component';
+
+import { ChangePassComponent } from './components/change-pass/change-pass.component';
+import { authGuard } from './auth.guard';
+
 import { WishListComponent } from './pages/wish-list/wish-list.component';
 
 export const routes: Routes = [
@@ -31,32 +35,44 @@ export const routes: Routes = [
   },
   {
     path: 'products',
+    canActivate: [authGuard],
     component: ProductsComponent,
   },
   {
     path: 'products/:id',
+    canActivate: [authGuard],
     component: ProductDetailsComponent,
   },
   {
     path: 'settings',
+    canActivate: [authGuard],
     component: UserSettingComponent,
     children: [
-      // {
-      //   path: 'wishlist',
-      //   component: wishlistComponent,
-      // },
+      {
+        path: '',
+        redirectTo: 'wish-list',
+        pathMatch: 'full',
+      },
       {
         path: 'address',
         component: ShippingAddressesComponent,
       },
       {
-        path: 'payment',
-        component: UserSettingComponent,
+        path: 'updatePassword',
+        component: ChangePassComponent,
       },
       {
         path: '',
         redirectTo: 'settings',
         pathMatch: 'full',
+      },
+      {
+        path: 'wish-list',
+        component: WishListComponent,
+      },
+      {
+        path: 'cart',
+        component: CartComponent,
       },
     ],
   },
@@ -70,7 +86,7 @@ export const routes: Routes = [
   },
   {
     path: 'wish-list',
-    component:WishListComponent ,
+    component: WishListComponent,
   },
 
   {

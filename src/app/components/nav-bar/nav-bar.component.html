@@ -11,6 +11,7 @@
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation"
+      data-bs-theme="dark"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -77,13 +78,14 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link initials"
+            class="nav-link initials ms-2 me-2"
             style="color: white"
             routerLink="settings"
             routerLinkActive="navLinkActive fw-bold"
             >{{ username }}
           </a>
         </li>
+
         }@else {
         <li class="nav-item">
           <a
@@ -93,6 +95,24 @@
             routerLink="home"
             routerLinkActive="navLinkActive fw-bold"
             >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link pt-3 pb-3 ps-4 pe-4"
+            style="color: white"
+            routerLink="contact"
+            routerLinkActive="navLinkActive fw-bold"
+            >Contact Us</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link pt-3 pb-3 ps-4 pe-4"
+            style="color: white"
+            routerLink="about"
+            routerLinkActive="navLinkActive fw-bold"
+            >About</a
           >
         </li>
 

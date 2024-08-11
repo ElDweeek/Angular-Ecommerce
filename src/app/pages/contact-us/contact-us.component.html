@@ -1,1 +1,253 @@
-<p>contact-us works!</p>
+<header id="site-header">
+  <!-- Offcanvas Block -->
+  <div
+    class="offcanvas offcanvas-top"
+    tabindex="-1"
+    id="offcanvasTop"
+    aria-labelledby="offcanvasTopLabel"
+  >
+    <div class="container pt-5">
+      <div class="offcanvas-header">
+        <h2 class="fw-bold pb-3">Search here</h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="position-relative" action="#" method="post">
+          <input
+            type="tel"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Examples: posts, services,.."
+          />
+          <button
+            class="position-absolute top-0 end-0 border-0 bg-transparent py-2 pe-2 text-secondary"
+            type="submit"
+            name="search"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Breadcrumb Block -->
+<section class="mt-5">
+  <div class="bg-light py-5">
+    <div class="container">
+      <div class="d-flex justify-content-between">
+        <h1 class="fw-bold">Contact us</h1>
+        <nav
+          class="pt-3"
+          style="
+            --bs-breadcrumb-divider: url(
+              &#34;data:image/svg + xml,
+              %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+            );
+          "
+          aria-label="breadcrumb"
+        ></nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="container py-5">
+    <div class="row g-5">
+      <!-- Contact Information Block -->
+      <div class="col-xl-6">
+        <div class="row row-cols-md-2 g-4">
+          <div class="aos-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="aos-item__inner">
+              <div class="bg-light hvr-shutter-out-horizontal d-block p-3">
+                <div class="d-flex justify-content-start">
+                  <i class="fa-solid fa-envelope h3 pe-2"></i>
+                  <span class="h5">Email</span>
+                </div>
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <div class="aos-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="aos-item__inner">
+              <div class="bg-light hvr-shutter-out-horizontal d-block p-3">
+                <div class="d-flex justify-content-start">
+                  <i class="fa-solid fa-phone h3 pe-2"></i>
+                  <span class="h5">Phone</span>
+                </div>
+                <span>+0123456789, +9876543210</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="aos-item mt-4" data-aos="fade-up" data-aos-delay="600">
+          <div class="aos-item__inner">
+            <div class="bg-light hvr-shutter-out-horizontal d-block p-3">
+              <div class="d-flex justify-content-start">
+                <i class="fa-solid fa-location-pin h3 pe-2"></i>
+                <span class="h5">Office location</span>
+              </div>
+              <span>#007, Street name, Bigtown BG23 4YZ, England</span>
+            </div>
+          </div>
+        </div>
+        <div class="aos-item" data-aos="fade-up" data-aos-delay="800">
+          <div class="mt-4 w-100 aos-item__inner">
+            <iframe
+              class="hvr-shadow"
+              width="100%"
+              height="345"
+              frameborder="0"
+              scrolling="no"
+              marginheight="0"
+              marginwidth="0"
+              src="https://maps.google.com/maps?width=100%25&amp;height=300&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+()&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+              ><a href="https://www.maps.ie/distance-area-calculator.html"
+                >measure acres/hectares on map</a
+              ></iframe
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form Block -->
+      <div class="col-xl-6">
+        <h2 class="pb-4">Leave a message</h2>
+        <div class="row g-4">
+          <div class="col-6 mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Fname</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="John"
+            />
+          </div>
+          <div class="col-6 mb-3">
+            <label for="exampleFormControlInput1" class="form-label"
+              >Lname</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Doe"
+            />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="name@example.com"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Phone</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="+1234567890"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Country</label
+          >
+          <select class="form-select" aria-label="Default select example">
+            <option value="1">USA</option>
+            <option value="2">Non USA</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label"
+            >Message</label
+          >
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+        <button type="button" class="btn btn-dark">Send Message</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer Block -->
+<footer id="site-footer">
+  <div class="bg-success bg-opacity-25 py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xl-3 col-sm-12">
+          <h5 class="pb-3">
+            <i class="fa-solid fa-user-group pe-1"></i> About us
+          </h5>
+          <span class="text-secondary"
+            >This is a wider card with supporting text below as a natural
+            lead-in to additional content.</span
+          >
+        </div>
+        <div class="col-md-6 col-xl-3 col-sm-12">
+          <h5 class="pb-3">
+            <i class="fa-solid fa-link pe-1"></i> Important links
+          </h5>
+          <ul>
+            <li>
+              <a href="#" class="text-decoration-none link-secondary"
+                >About us</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none link-secondary"
+                >Privacy policy</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none link-secondary"
+                >Terms of services</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-xl-3 col-sm-12">
+          <h5 class="pb-3">
+            <i class="fa-solid fa-location-dot pe-1"></i> Our location
+          </h5>
+          <span class="text-secondary">
+            ITI<br />
+            Demarys, Minya<br />
+            720001, Egypt<br />
+          </span>
+        </div>
+        <div class="col-md-6 col-xl-3 col-sm-12">
+          <h5 class="pb-3">
+            <i class="fa-solid fa-paper-plane pe-1"></i> Stay updated
+          </h5>
+          <form>
+            <input
+              type="text"
+              class="w-100 mb-2 form-control"
+              name=""
+              placeholder="Email ID"
+            />
+            <button class="w-100 btn btn-dark">Subscribe now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

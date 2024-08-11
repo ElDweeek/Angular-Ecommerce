@@ -15,6 +15,7 @@ export class NavBarComponent implements OnInit {
   Logo = 'assets/images/LOGO.png';
   isLoggedIn = false;
 
+
   username: string;
 
 
@@ -71,5 +72,5 @@ export class NavBarComponent implements OnInit {
 
    }
 
-   
+
 }
