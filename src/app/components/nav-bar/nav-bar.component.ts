@@ -12,16 +12,16 @@ import { AuthorizationService } from '../../services/users/authorization.service
 export class NavBarComponent {
   Logo = 'assets/images/LOGO.png';
   isLoggedIn = false;
-<<<<<<< HEAD
+
 
   username: string;
-=======
-  username!: string;
 
 
 
 
->>>>>>> 73ba8cdfb3b551bd545defd8fc652cdb00bfa7c1
+
+
+
 
   constructor(private _authorizationService: AuthorizationService) {
     this._authorizationService.loggedIn.subscribe((res) => {
