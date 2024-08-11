@@ -11,7 +11,7 @@
     <p-carousel [value]="paginatedCategories" [numVisible]="5" [numScroll]="3" [circular]="false"
       [responsiveOptions]="responsiveOptions" autoplayInterval="3000" [showIndicators]="false">
       <ng-template let-category pTemplate="item">
-        <div class="border rounded m-2 p-3">
+        <div class="border rounded m-2 p-3 carousel-card" (click)="navigateToProducts('category', category.name)">
           <div class="mb-3">
             <div class="position-relative mx-auto">
               <img src="{{ category.image }}" alt="{{category.name}}" class="img-fluid w-100 border-round"
@@ -42,29 +42,30 @@
   <div class="card">
     <p-carousel [value]="paginatedBrands" [numVisible]="5" [numScroll]="3" [circular]="false"
       [responsiveOptions]="responsiveOptions" autoplayInterval="3000" [showIndicators]="false">
-      <ng-template let-category pTemplate="item">
-        <div class="border rounded m-2 p-3">
+      <ng-template let-brand pTemplate="item">
+        <div class="border rounded m-2 p-3 carousel-card" (click)="navigateToProducts('brand', brand.name)">
           <div class="mb-3">
-            <div class="position-relative mx-auto">
-              <img src="{{ category.image }}" alt="{{category.name}}" class="img-fluid w-100 border-round"
+            <div class="position-relative mx-auto ">
+              <img src="{{ brand.image }}" alt="{{brand.name}}" class="img-fluid w-100 border-round"
                 style="height: 150px;" />
             </div>
           </div>
           <div class="mb-3 fs-6 text-center  text-truncate">
-            {{ category.name }}
+            {{ brand.name }}
           </div>
         </div>
       </ng-template>
     </p-carousel>
     <div class="mt-3">
 
-      <paginator [rows]="rows" [totalRecords]="brands.length" (pageChange)="paginateBrands($event)" >
+      <paginator [rows]="rows" [totalRecords]="brands.length" (pageChange)="paginateBrands($event)">
       </paginator>
     </div>
   </div>
 
 
   <ads-banner></ads-banner>
+
 
 
 </div>

@@ -9,8 +9,12 @@ import { SigninSignupComponent } from './pages/signin-signup/signin-signup.compo
 import { UserSettingComponent } from './components/user-setting/user-setting.component';
 import { CartComponent } from './pages/Cart/cart.component';
 import { ShippingAddressesComponent } from './components/shipping-addresses/shipping-addresses.component';
+<<<<<<< HEAD
 import { ChangePassComponent } from './components/change-pass/change-pass.component';
 import { authGuard } from './auth.guard';
+=======
+import { WishListComponent } from './pages/wish-list/wish-list.component';
+>>>>>>> 73ba8cdfb3b551bd545defd8fc652cdb00bfa7c1
 
 export const routes: Routes = [
   {
@@ -71,6 +75,10 @@ export const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
+  },
+  {
+    path: 'wish-list',
+    component:WishListComponent ,
   },
 
   {

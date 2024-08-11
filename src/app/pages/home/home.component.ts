@@ -14,6 +14,7 @@ import { TagModule } from 'primeng/tag';
 import { PaginatorComponent } from '../../components/paginator/paginator.component';
 import { AdsBannerComponent } from "../../components/ads-banner/ads-banner.component";
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -23,6 +24,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
+
   products: Array<Product> = [];
   limit: number = 10;
   page: number = 1;
@@ -33,8 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   brands: Array<Brand> = [];
   //---------------------
   paginatedCategories: Array<Category> = [];
-  paginatedBrands: any[] = [];
-  // paginatedProducts: any[] = [];
+  paginatedBrands: Array<Brand> = [];
   rows: number = 5;
   currentPageCategories: number = 0;
   currentPageBrands: number = 0;
@@ -73,6 +74,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _productService: ProductsService,
     private _categoryService: CategoriesService,
     private _brandsService: BrandsService,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -164,6 +166,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     const start = this.currentPageBrands * this.rows;
     const end = start + this.rows;
     this.paginatedBrands = this.brands.slice(start, end);
+  }
+
+
+  navigateToProducts(braOrCat: string , name: string){
+    this._router.navigate(['/products'], { queryParams: { braOrCat , name }, fragment: 'CategoryOrBrand' });
   }
 
 

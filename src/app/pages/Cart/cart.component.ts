@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -7,15 +7,18 @@ import { ToastModule } from 'primeng/toast';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CartService } from '../../services/Cart/cart.service';
 import { DeleteProductCartService } from '../../services/Cart/delete-product-cart.service';
-import { Product } from '../../interfaces/product/product.interface';
+import { UpdatProductCartService } from '../../services/Cart/updat-product-cart.service';
+import { CommonModule } from '@angular/common';
+import { LoaderComponent } from "../../components/loader/loader.component";
+
 
 
 
 @Component({
   selector: 'cart',
   standalone: true,
-  imports: [ConfirmDialogModule,ToastModule,ButtonModule],
-  templateUrl: './cart.component.html',
+  imports: [ConfirmDialogModule, ToastModule, ButtonModule, CommonModule, LoaderComponent],
+templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
   providers:[ConfirmationService,MessageService],
 
@@ -27,18 +30,23 @@ import { Product } from '../../interfaces/product/product.interface';
   ]
 })
 
-export class CartComponent {
+export class CartComponent  implements OnInit{
   position: string = 'center';
   cartProducts:any[] = []
   data={}
   numOfCartItems:number=0
-  totalPrice:number=0
-  constructor(private _cartServic: CartService,private _deleteService:DeleteProductCartService,private confirmationService: ConfirmationService, private messageService: MessageService) {
+  totalPrice:number=0;
+  isLoading=true;
 
-    this.getCart()
-
+  constructor(private _cartServic: CartService,private _deleteService:DeleteProductCartService,private confirmationService: ConfirmationService, private messageService: MessageService,private _updateService:UpdatProductCartService) {
 
   }
+
+  ngOnInit(): void {
+    this.getCart();
+  }
+
+
   getCart(){
     this._cartServic.getCartProducts().subscribe(
       {
@@ -59,7 +67,20 @@ export class CartComponent {
       }
     )
   }
+  updateCartItem(prodId: string, newCount: number) {
+    if (newCount < 1) return;
+    this._updateService.updateCart(prodId, newCount).subscribe({
+      next: (res) => {
+        console.log(res);
 
+        this.getCart();
+      },
+      error: (err) => {
+        console.error(err);
+
+      }
+    });
+  }
 
   confirmPosition(position: string,prodID:string) {
     this.position = position;
@@ -72,7 +93,7 @@ export class CartComponent {
         rejectIcon:"none",
         rejectButtonStyleClass:"p-button-text",
         accept: () => {
-            this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'delted' });
+            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'deleted' });
             this.deleteCartProd(prodID)
         } ,
         key: 'positionDialog'
@@ -84,11 +105,11 @@ export class CartComponent {
       {
         next: (res) => {
             this.getCart()
-
+            this.isLoading=false;
         },
         error: (err) => {
           console.log(err);
-
+          this.isLoading=false
         },
         complete: () => {
           console.log("completed");
@@ -97,4 +118,8 @@ export class CartComponent {
     )
 
 }
+
+// navigateToHome() {
+//   this.router.navigate(['/home']);
+// }
 }

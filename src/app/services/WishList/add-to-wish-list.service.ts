@@ -7,16 +7,16 @@ import { isPlatformBrowser } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
-export class AddProductService {
+export class AddToWishListService {
 
-  private apiUrl = 'https://ecommerce.routemisr.com/api/v1/cart';
+  private apiUrl = 'https://ecommerce.routemisr.com/api/v1/wishlist';
   private isBrowser: boolean = false;
   private userToken = '';
   constructor(private _httpClient: HttpClient, @Inject(PLATFORM_ID) platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  addToCart(prodId:string): Observable<any> {
+  addToWishList(prodId:string): Observable<any> {
     let headers = new HttpHeaders();
 
     if (this.isBrowser) {

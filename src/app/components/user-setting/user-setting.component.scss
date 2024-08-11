@@ -1,3 +1,22 @@
 .vr {
   height: 25vh;
 }
+#mycontainer {
+  max-width: 95%;
+  margin: 0 5%;
+}
+
+ul
+ {
+  list-style: none;
+ }
+.card {
+  width: fit-content;
+  top: 25%;
+  left: .5%;
+}
+
+:host ::ng-deep .p-ripple.p-element.p-button.p-component.p-button-icon-only{
+  background-color: #f86f03;
+  border-color: #f86f03;
+}

@@ -8,3 +8,8 @@
 ::ng-deep .p-carousel .p-carousel-next {
   display: none !important;
 }
+
+.carousel-card:hover {
+  scale: 1.05;
+  cursor: pointer;
+}

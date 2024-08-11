@@ -7,7 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
-export class AddProductService {
+export class UpdatProductCartService {
 
   private apiUrl = 'https://ecommerce.routemisr.com/api/v1/cart';
   private isBrowser: boolean = false;
@@ -16,17 +16,17 @@ export class AddProductService {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  addToCart(prodId:string): Observable<any> {
+  updateCart(productId:string,newCount:number): Observable<any> {
     let headers = new HttpHeaders();
 
     if (this.isBrowser) {
-      this.userToken =JSON.parse(localStorage.getItem('token'))
+      this.userToken = JSON.parse(localStorage.getItem('token'))
       if (this.userToken) {
         headers = headers.set('token', this.userToken);
       }
     }
-    const body = { productId:prodId };
-    return this._httpClient.post<any>(this.apiUrl,body, { headers });
+    const body = { count:newCount };
+    return this._httpClient.put<any>(`${this.apiUrl}/${productId}`,body, { headers });
   }
 
 }

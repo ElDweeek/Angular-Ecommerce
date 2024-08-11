@@ -11,18 +11,18 @@ import { PaginatorComponent } from "../../components/paginator/paginator.compone
 import { SliderModule } from 'primeng/slider';
 import { AutoCompleteModule } from 'primeng/autocomplete';  // Import AutoCompleteModule
 import { FormsModule } from '@angular/forms';  // Import FormsModule
-import { NgFor, NgIf } from '@angular/common';
+import { TruncatePipe } from '../../pipes/truncate/truncate.pipe';
+import { BraAndCatProductsComponent } from "../../components/bra-and-cat-products/bra-and-cat-products.component";
 
 
 @Component({
   selector: 'products',
   standalone: true,
-  imports: [CardModule, ButtonModule, SingleProductComponent, TopRatedProductsComponent, LoaderComponent, PaginatorComponent,SliderModule,AutoCompleteModule,FormsModule,NgFor,NgIf],
+  imports: [CardModule, ButtonModule, SingleProductComponent, TopRatedProductsComponent, LoaderComponent, PaginatorComponent, SliderModule, AutoCompleteModule, FormsModule, TruncatePipe, BraAndCatProductsComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-  selectedProduct: any;
 
   rangeValues: number[] = [];
   active: string ="";
@@ -30,7 +30,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   productsHeader: string = "All Products"
   products: Array<Product> = [];
   //-----------------------------
-  searchTerm: string = '';
+  productFound: any = '';
   filteredProducts: any[] = [];
   minPrice!:number
   maxPrice!:number
@@ -80,33 +80,39 @@ export class ProductsComponent implements OnInit, OnDestroy {
   updatePaginatedProducts() {
     const start = this.currentPageProducts * this.rows;
     const end = start + this.rows;
-    this.paginatedProducts = this.products.slice(start, end);
 
+    const sourceArray = this.filteredProducts.length > 0 ? this.filteredProducts : this.products;
 
-  }
+    this.paginatedProducts = sourceArray.slice(start, end);
+}
 
-
-
-
-  sortByNameAtoZ() {
+sortByNameAtoZ() {
     this.products.sort((a, b) => a.title.localeCompare(b.title));
+    this.filteredProducts = this.products;
+    this.currentPageProducts = 0;
     this.updatePaginatedProducts();
-    this.active = "active"
-  }
+}
 
-  sortByNameZtoA() {
+sortByNameZtoA() {
     this.products.sort((a, b) => b.title.localeCompare(a.title));
+    this.filteredProducts = this.products;
+    this.currentPageProducts = 0;
     this.updatePaginatedProducts();
-  }
+}
 
-  sortByPriceLowtoHigh(){
+sortByPriceLowtoHigh(){
     this.products.sort((a,b)=> a.price - b.price);
-    this.updatePaginatedProducts()
-  }
-  sortByPriceHightoLow(){
+    this.filteredProducts = this.products;
+    this.currentPageProducts = 0;
+    this.updatePaginatedProducts();
+}
+
+sortByPriceHightoLow(){
     this.products.sort((a,b)=> b.price - a.price);
-    this.updatePaginatedProducts()
-  }
+    this.filteredProducts = this.products;
+    this.currentPageProducts = 0;
+    this.updatePaginatedProducts();
+}
 
   filterProductsByPrice() {
     const [minPrice, maxPrice] = this.rangeValues;
@@ -122,29 +128,22 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   }
 
+  searchForProduct(event: any) {
+    const query = event.query.toLowerCase();
 
-
-
-  onSearchChange(event: any) {
-    const query = event.target.value.toLowerCase();
-    this.filteredProducts = this.products.filter(product => product.title.toLowerCase().includes(query));
-  }
-  selectProduct(product: any) {
-    console.log('Selected product:', product);  // Log the entire event object
-
-    // Now use the appropriate property to filter the products
-    const selectedTitle = product?.title;
-
-    if (selectedTitle) {
-      this.filteredProducts = this.products.filter(product => product.title === selectedTitle);
-      this.paginatedProducts = this.filteredProducts.slice(0, this.rows);
+    if (!query) {
+        // If the search query is cleared, show all products
+        this.filteredProducts = this.products;
     } else {
-      console.warn('Product title is undefined');
-    }  }
+        // Otherwise, filter the products based on the search query
+        this.filteredProducts = this.products.filter(product =>
+            product.title.toLowerCase().includes(query)
+        );
+    }
 
-
-
-
+    this.currentPageProducts = 0;
+    this.updatePaginatedProducts();
+}
 
   ngOnDestroy() {
     if (this._subscription) {
