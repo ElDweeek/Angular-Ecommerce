@@ -43,12 +43,13 @@
         <div class="mt-1 mb-2">
           @if(loginForm.get("password")?.errors["required"]){
           <p class="mb-0 errors">Required</p>
-          }@else if (loginForm.get("password")?.errors["pattern"]) {
+          }
+          <!-- @else if (loginForm.get("password")?.errors["pattern"]) {
           <p class="mb-0 errors">
             password must have at least 8 characters & contain a letter & a
             number
           </p>
-          }
+          } -->
         </div>
         }
         <button type="submit" class="btn solid">
@@ -102,8 +103,7 @@
           <p class="errors mb-0">Required</p>
           }@else if (registerForm.get("name")?.errors["pattern"]) {
           <p class="mb-0 errors">
-            Username length must be between [5-15] characters & not contain
-            special characters.
+            Username length must be between [5-15] characters
           </p>
           }
         </div>
@@ -140,8 +140,7 @@
           <p class="mb-0 errors">Required</p>
           }@else if (registerForm.get("password")?.errors["pattern"]) {
           <p class="mb-0 errors">
-            password must have at least 8 characters & contain a letter & a
-            number
+            password must have at least 8 characters & contain a letter & number
           </p>
           }
         </div>
@@ -181,7 +180,7 @@
           }@else if
           (registerForm.get("phone")?.errors["minlength"]||registerForm.get("phone")?.errors["maxlength"])
           {
-          <p class="mb-0 errors">Phone Number length must be 11 number only</p>
+          <p class="mb-0 errors">Phone Number length should be 11 number</p>
           }
         </div>
         }
