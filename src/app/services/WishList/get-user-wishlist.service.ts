@@ -6,8 +6,8 @@ import { isPlatformBrowser } from '@angular/common';
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
-  private apiUrl = 'https://ecommerce.routemisr.com/api/v1/cart';
+export class WishListService {
+  private apiUrl = 'https://ecommerce.routemisr.com/api/v1/wishlist';
   private isBrowser: boolean = false;
   private userToken = '';
   constructor(
@@ -17,13 +17,14 @@ export class CartService {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  getCartProducts(): Observable<any> {
+  getWishListProduct(): Observable<any> {
     let headers = new HttpHeaders();
 
     if (this.isBrowser) {
       this.userToken =JSON.parse(localStorage.getItem('token')) ;
       if (this.userToken) {
         console.log(this.userToken);
+
         headers = headers.set('token',this.userToken);
       }
     }

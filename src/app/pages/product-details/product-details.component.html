@@ -7,7 +7,7 @@
           <div class="photo-main">
             <div class="controls">
               <i class="material-icons pi pi-share-alt p-2"></i>
-              <i class="material-icons pi pi-heart-fill p-2"></i>
+              <i class="material-icons pi pi-heart-fill p-2" (click)="addToWishList(product.id)"></i>
             </div>
             <img [src]="product?.imageCover" alt="{{product?.title}}">
           </div>

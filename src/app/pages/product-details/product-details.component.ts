@@ -3,9 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products/products.service';
 import { Product } from '../../interfaces/product/product.interface';
 import { AddProductService } from '../../services/Cart/add-product.service';
-import { FormsModule } from '@angular/forms';
-import { RatingModule } from 'primeng/rating';
-// import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'product-details',
@@ -20,8 +17,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _productsService: ProductsService,
-    private _addToCartService: AddProductService
-  ) { }
+    private _addToCartService:AddProductService
+  ) {}
 
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
@@ -58,9 +55,4 @@ export class ProductDetailsComponent implements OnInit {
     )
   }
 
-
-
-  changeImageCover(image: string) {
-    this.product.imageCover = image;
-  }
 }
