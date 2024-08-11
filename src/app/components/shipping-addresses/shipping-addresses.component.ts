@@ -19,6 +19,7 @@ export class ShippingAddressesComponent implements OnInit {
   form: FormGroup;
   successMsg: string = '';
   failedMsg: string = '';
+  addresses: any[] = [];
   constructor(
     private fb: FormBuilder,
     private _authorizationService: AuthorizationService
@@ -54,6 +55,7 @@ export class ShippingAddressesComponent implements OnInit {
   }
   addUserAddress() {
     console.log(this.form.value);
+    console.log(this.form.valid);
     this.successMsg = '';
     const flattenedContacts = this.contacts.value;
     this._authorizationService.addAddresses(flattenedContacts).subscribe({
@@ -96,49 +98,22 @@ export class ShippingAddressesComponent implements OnInit {
       },
     });
   }
-  flattenContacts(contacts: FormArray): any[] {
-    return contacts.controls.map((control) => control.value);
+  // flattenContacts(contacts: FormArray): any[] {
+  //   return contacts.controls.map((control) => control.value);
+  // }
+  getAddresses() {
+    this._authorizationService.getUserAddresses().subscribe({
+      next: (res) => {
+        this.addresses = res.data;
+        console.log('Address retrieve successfully:', res);
+        console.log(this.addresses);
+      },
+      error: (err) => {
+        console.error('Failed to retrieve address:', err);
+      },
+      complete: () => {
+        console.log('Address addition process completed.');
+      },
+    });
   }
-  // getAddresses() {
-
-  //   this._authorizationService.getUserAddresses().subscribe({
-  //     next: (res) => {
-
-  //       console.log('Address retrieve successfully:', res);
-
-  //     },
-  //     error: (err) => {
-
-  //       console.error('Failed to retrieve address:', err);
-
-  //     },
-  //     complete: () => {
-
-  //       console.log('Address addition process completed.');
-  //     },
-  //   });
-  // }
-  // loadAddresses(): void {
-  //   this._authorizationService.getUserAddresses().subscribe({
-  //     next: (res) => {
-  //       // Assuming the API response is an array of addresses
-  //       const addresses = res?.data || []; // Adjust based on actual API response structure
-
-  //       // Clear existing contacts
-  //       this.contacts.clear();
-
-  //       // Add the fetched addresses to the form
-  //       addresses.forEach((address: any) => {
-  //         this.contacts.push(this.createContact(address));
-  //       });
-  //     },
-  //     error: (err) => {
-  //       console.error('Failed to fetch addresses:', err);
-  //       // Optionally, handle error response here
-  //     },
-  //     complete: () => {
-  //       console.log('Addresses fetched successfully.');
-  //     },
-  //   });
-  // }
 }

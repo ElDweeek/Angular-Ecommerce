@@ -1,7 +1,7 @@
 <form [formGroup]="updatePassForm" (ngSubmit)="updatePass()">
   <div class="container">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-lg-6 col-md-8 col-sm-12 offset-lg-3 offset-md-2 mt-5">
         @if(updateErrMsg){
         <p class="bg-danger p-2 mt-2 text-white">{{ updateErrMsg }}</p>
         }@else if (updateSuccMsg) {
@@ -73,12 +73,12 @@
           }
         </div>
         }
+        <button type="submit" class="btn button-52 mt-4 d-block ms-auto">
+          @if (isLoading) {
+          <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+          } @else{Confirm}
+        </button>
       </div>
     </div>
   </div>
-  <button type="submit" class="btn button-52 mt-4">
-    @if (isLoading) {
-    <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-    } @else{Confirm}
-  </button>
 </form>

@@ -1,53 +1,55 @@
-<div class="card container  w-50  mt-5 px-0">
+<div class="card container w-50 mt-5 px-0">
   <div class="row">
-    <div class="cart">
+    <div class="cart mt-5">
       <div class="mb-3 d-flex justify-content-between">
         <div><h4 class="fw-bold">wish list</h4></div>
         <div class="text-muted">{{ numOfCartItems }} items</div>
       </div>
 
-
       @if (whishListProducts?.length==0 && isLoading) {
-            <loader/>
+      <loader />
       }@else if (whishListProducts?.length==0 && !isLoading) {
-          <h2>your wish List is empty!</h2>
-      }@else {
-        @for (wishListProduct of whishListProducts; track $index) {
-          <div class="row border-top border-bottom text-center">
-            <div class="main d-flex align-items-center">
-              <div class="col-2">
-                <img class="w-100" [src]="wishListProduct.imageCover" />
-              </div>
-
-              <div class="col-3">
-                <p class="text-muted">{{ wishListProduct.category.name }}</p>
-                <p>{{ wishListProduct.title }}</p>
-              </div>
-
-              <div class="col-2">{{ wishListProduct.price }} EGP</div>
-
-              <div class="col-2">
-                 <i  (click)="addToCartRemoveFromWishList(wishListProduct._id)"  class="pi pi-shopping-cart"></i>
-              </div>
-              <div class="col-2">
-                  <p-button (click)="confirmPosition('top',wishListProduct._id)" label="Delete" severity="danger" [outlined]="true" />
-              </div>
-            </div>
+      <h2>your wish List is empty!</h2>
+      }@else { @for (wishListProduct of whishListProducts; track $index) {
+      <div class="row border-top border-bottom text-center">
+        <div class="main d-flex align-items-center">
+          <div class="col-2">
+            <img class="w-100" [src]="wishListProduct.imageCover" />
           </div>
-          }
-      }
 
+          <div class="col-3">
+            <p class="text-muted">{{ wishListProduct.category.name }}</p>
+            <p>{{ wishListProduct.title }}</p>
+          </div>
 
+          <div class="col-2">{{ wishListProduct.price }} EGP</div>
+
+          <div class="col-2">
+            <i
+              (click)="addToCartRemoveFromWishList(wishListProduct._id)"
+              class="pi pi-shopping-cart"
+            ></i>
+          </div>
+          <div class="col-2">
+            <p-button
+              (click)="confirmPosition('top', wishListProduct._id)"
+              label="Delete"
+              severity="danger"
+              [outlined]="true"
+            />
+          </div>
+        </div>
+      </div>
+      } }
 
       <p-toast position="top-right"></p-toast>
 
       <p-confirmDialog
-      key="positionDialog"
-      [position]="position"
-      rejectButtonStyleClass="p-button-outlined" />
-     <p-confirmDialog />
+        key="positionDialog"
+        [position]="position"
+        rejectButtonStyleClass="p-button-outlined"
+      />
+      <p-confirmDialog />
     </div>
-
-
   </div>
 </div>

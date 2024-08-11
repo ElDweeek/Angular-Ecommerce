@@ -3,17 +3,22 @@ import { AuthorizationService } from '../../services/users/authorization.service
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
+import { WishListComponent } from '../../pages/wish-list/wish-list.component';
 @Component({
   selector: 'user-setting',
   standalone: true,
-  imports: [RouterLink, RouterOutlet,SidebarModule, ButtonModule],
+  imports: [
+    RouterLink,
+    RouterOutlet,
+    SidebarModule,
+    ButtonModule,
+    WishListComponent,
+  ],
   templateUrl: './user-setting.component.html',
   styleUrl: './user-setting.component.scss',
 })
 export class UserSettingComponent {
-
   sidebarVisible: boolean = false;
-
 
   constructor(private _authorizationService: AuthorizationService) {}
   logOut() {

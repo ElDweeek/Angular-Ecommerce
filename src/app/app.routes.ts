@@ -48,10 +48,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
     component: UserSettingComponent,
     children: [
-      // {
-      //   path: 'wishlist',
-      //   component: wishlistComponent,
-      // },
+      {
+        path: '',
+        redirectTo: 'wish-list',
+        pathMatch: 'full',
+      },
       {
         path: 'address',
         component: ShippingAddressesComponent,
@@ -64,6 +65,14 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'settings',
         pathMatch: 'full',
+      },
+      {
+        path: 'wish-list',
+        component: WishListComponent,
+      },
+      {
+        path: 'cart',
+        component: CartComponent,
       },
     ],
   },
