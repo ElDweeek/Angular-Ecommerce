@@ -10,7 +10,11 @@
       @if (whishListProducts?.length==0 && isLoading) {
             <loader/>
       }@else if (whishListProducts?.length==0 && !isLoading) {
-          <h2>your wish List is empty!</h2>
+        <div class="text-center p-5">
+          <h2>your cart is empty!</h2>
+          <p>Browse our categories and discover our best deals!</p>
+          <button (click)="navigatToProducts()" class="bg-main px-4 py-2 border-0 rounded-2 text-white"> Start Shopping now </button>
+        </div>
       }@else {
         @for (wishListProduct of whishListProducts; track $index) {
           <div class="row border-top border-bottom text-center">
@@ -38,7 +42,7 @@
       }
 
 
-
+      <p-toast />
       <p-toast position="top-right"></p-toast>
 
       <p-confirmDialog

@@ -8,12 +8,16 @@ import { AddToWishListService } from '../../services/WishList/add-to-wish-list.s
 
 
 import { LoaderComponent } from "../loader/loader.component";
+import { CartCountService } from '../../services/Cart/cart-count.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 @Component({
   selector: 'single-product',
   standalone: true,
-  imports: [TruncatePipe, RouterLink, LoaderComponent],
+  imports: [TruncatePipe, RouterLink, LoaderComponent,ToastModule],
+  providers:[MessageService],
   templateUrl: './single-product.component.html',
   styleUrl: './single-product.component.scss'
 })
@@ -24,7 +28,7 @@ export class SingleProductComponent {
 
   // ngOnInit() {
   // }
-constructor(private _productService : ProductsService,  private _addToCartService:AddProductService,private _addToWishList:AddToWishListService) {}
+constructor(private _productService : ProductsService,  private _addToCartService:AddProductService,private _addToWishList:AddToWishListService,private _cartCount:CartCountService,private _messageService:MessageService) {}
 onViewDetails() {
   this._productService.getProductViewDetails(this.product.id);
 }
@@ -34,13 +38,19 @@ onViewDetails() {
     // }
 
 
-  //cart
 
+  show() {
+    this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added  successfully'});
+  }
+    //cart
   addToCart(prodId:string){
     this._addToCartService.addToCart(prodId).subscribe(
     {
       next: (res) => {
         console.log(res);
+        this.show()
+        const newCount = res.numOfCartItems;
+        this._cartCount.updateNumOfCartItems(newCount);
       },
       error: (err) => {
         console.log(err);
@@ -56,6 +66,7 @@ onViewDetails() {
     this._addToWishList.addToWishList(prodId).subscribe(
     {
       next: (res) => {
+        this.show()
         console.log(res);
       },
       error: (err) => {

@@ -4,12 +4,19 @@ import { ProductsService } from '../../services/products/products.service';
 import { Product } from '../../interfaces/product/product.interface';
 import { AddProductService } from '../../services/Cart/add-product.service';
 import { AddToWishListService } from '../../services/WishList/add-to-wish-list.service';
+import { CartCountService } from '../../services/Cart/cart-count.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'product-details',
+  standalone:true,
+  imports:[ToastModule],
+  providers:[MessageService],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
+
 export class ProductDetailsComponent implements OnInit {
   product!: Product | undefined;
 
@@ -17,7 +24,9 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private _productsService: ProductsService,
     private _addToCartService:AddProductService,
-    private _addToWishList:AddToWishListService
+    private _addToWishList:AddToWishListService,
+    private _cartCount:CartCountService,
+    private _messageService:MessageService
   ) {}
 
   ngOnInit(): void {
@@ -37,12 +46,17 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 
-
+  show() {
+    this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully'});
+  }
   addProductToCart(prodId:string){
     this._addToCartService.addToCart(prodId).subscribe(
     {
       next: (res) => {
         console.log(res);
+        this.show()
+        const newCount = res.numOfCartItems;
+        this._cartCount.updateNumOfCartItems(newCount);
       },
       error: (err) => {
         console.log(err);
@@ -59,6 +73,7 @@ export class ProductDetailsComponent implements OnInit {
     {
       next: (res) => {
         console.log(res);
+        this.show()
       },
       error: (err) => {
         console.log(err);

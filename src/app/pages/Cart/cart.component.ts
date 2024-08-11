@@ -10,6 +10,8 @@ import { DeleteProductCartService } from '../../services/Cart/delete-product-car
 import { UpdatProductCartService } from '../../services/Cart/updat-product-cart.service';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from "../../components/loader/loader.component";
+import { CartCountService } from '../../services/Cart/cart-count.service';
+import { Router } from '@angular/router';
 
 
 
@@ -38,7 +40,7 @@ export class CartComponent  implements OnInit{
   totalPrice:number=0;
   isLoading=true;
 
-  constructor(private _cartServic: CartService,private _deleteService:DeleteProductCartService,private confirmationService: ConfirmationService, private messageService: MessageService,private _updateService:UpdatProductCartService) {
+  constructor(private _cartServic: CartService,private _deleteService:DeleteProductCartService,private confirmationService: ConfirmationService, private messageService: MessageService,private _updateService:UpdatProductCartService,private _cartCount:CartCountService,private router:Router) {
 
   }
 
@@ -54,12 +56,15 @@ export class CartComponent  implements OnInit{
           this.cartProducts=res.data.products
           this.totalPrice=res.data.totalCartPrice
           this.data=res.data
-          this.numOfCartItems=res.numOfCartItems
+          this.numOfCartItems=res.numOfCartItems;
+
+          this._cartCount.updateNumOfCartItems(this.numOfCartItems);
+          this.isLoading = false;
           console.log(res.data);
         },
         error: (err) => {
           console.log(err);
-
+          this.isLoading = false;
         },
         complete: () => {
           console.log("get cart products");
@@ -73,11 +78,11 @@ export class CartComponent  implements OnInit{
       next: (res) => {
         console.log(res);
 
-        this.getCart();
+        this.cartProducts= res.data.products
+        this.totalPrice=res.data.totalCartPrice
       },
       error: (err) => {
         console.error(err);
-
       }
     });
   }
@@ -104,7 +109,10 @@ export class CartComponent  implements OnInit{
     this._deleteService.deletProduct(productId).subscribe(
       {
         next: (res) => {
-            this.getCart()
+            console.log(res.data.products);
+            this.cartProducts=res.data.products;
+            this.numOfCartItems=res.numOfCartItems
+            this._cartCount.updateNumOfCartItems(this.numOfCartItems);
             this.isLoading=false;
         },
         error: (err) => {
@@ -119,7 +127,10 @@ export class CartComponent  implements OnInit{
 
 }
 
-// navigateToHome() {
-//   this.router.navigate(['/home']);
-// }
+
+
+navigatToProducts(){
+  this.router.navigate(['/products']);
+}
+
 }

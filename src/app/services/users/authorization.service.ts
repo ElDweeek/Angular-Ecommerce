@@ -51,6 +51,7 @@ export class AuthorizationService {
     if (this.isBrowser) {
       localStorage.removeItem('token');
       localStorage.removeItem('username');
+      localStorage.removeItem('numOfCartItems');
       this.loggedIn.next('');
       this.router.navigate(['/signin']);
     }
