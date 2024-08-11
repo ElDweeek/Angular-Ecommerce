@@ -1,3 +1,7 @@
+.paginated-container {
+  background-color: #fcfcfc;
+}
+
 ul {
   list-style: none;
 }
@@ -39,14 +43,20 @@ ul li>span {
   }
 }
 
-.search-input{
-  width: 100%;
-  border: none;
-  &:focus {
-    border: none;
-  }
-}
-.searching-list {
-  position: absolute;
+:host ::ng-deep ul#pn_id_1_list {
+  padding: 0;
 
 }
+:host ::ng-deep ul#pn_id_1_list {
+  padding: 0;
+
+}
+:host ::ng-deep ul#pn_id_1_list li {
+  font-weight: 700;
+  border-bottom: 1px solid #eee;
+  &:hover {
+    color: #0D6FeD;
+  }
+
+}
+

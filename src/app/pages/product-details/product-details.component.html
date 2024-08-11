@@ -9,12 +9,12 @@
               <i class="material-icons pi pi-share-alt p-2"></i>
               <i class="material-icons pi pi-heart-fill p-2"></i>
             </div>
-            <img src="{{product?.imageCover}}" alt="{{product?.title}}">
+            <img [src]="product?.imageCover" alt="{{product?.title}}">
           </div>
           <div class="photo-album">
             <ul>
               @for(image of product?.images; track image) {
-                <li><img src="{{image}}"></li>
+                <li><img src="{{image}}" role="button" (click)="changeImageCover(image)"></li>
               }
             </ul>
           </div>
@@ -29,7 +29,8 @@
       <div class="product__info">
         <div class="title">
           <h1>{{product?.title}}</h1>
-          <span>{{product?.ratingsAverage}}</span>
+          <p class="text-black-50 mt-3">Rating: {{product?.ratingsAverage}}</p>
+          <p-rating [ngModel]="product?.ratingsAverage" [cancel]="false" [stars]="5" [disabled]="true"></p-rating>
         </div>
         <div class="price">
           <span>{{product?.price}} </span>$
@@ -38,7 +39,7 @@
           <h3>SELECT A COLOR</h3>
           <ul>
             @for(image of product?.images; track image) {
-              <li><img src="{{image}}"></li>
+              <li><img src="{{image}}" (click)="changeImageCover(image)"></li>
             }
           </ul>
         </div>

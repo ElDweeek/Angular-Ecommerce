@@ -37,5 +37,14 @@ export class ProductsService {
       map(res => res.data.filter((product: Product) => product.category.name === category))
     )
   }
+
+  getProductsByBrands(brand: string): Observable<any> {
+    return this._httpClient.get<any>(`${apiUrl}/api/v1/products?limit=0`).pipe(
+      map(res => res.data.filter((product: Product) => product.brand.name === brand))
+    )
+  }
+
+
+
 }
 
