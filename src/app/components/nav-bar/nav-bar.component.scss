@@ -2,9 +2,7 @@
 .navbar {
   min-height: 56px;
 }
-.navLinkActive {
-  background-color: #f86f03;
-}
+
 
 @media (max-width: 992px) {
 .nav-item {
@@ -28,4 +26,8 @@
 }
 .initials:hover {
   background-color: #f86f03;
+}
+
+.navLinkActive {
+  background-color: #f86f03 ;
 }

@@ -5,6 +5,7 @@ import { Product } from '../../interfaces/product/product.interface';
 import { AddProductService } from '../../services/Cart/add-product.service';
 import { FormsModule } from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
+import { AddToWishListService } from '../../services/WishList/add-to-wish-list.service';
 @Component({
   selector: 'product-details',
   standalone: true,
@@ -19,7 +20,7 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private _productsService: ProductsService,
     private _addToCartService:AddProductService,
-
+    private _addToWishList:AddToWishListService
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +58,24 @@ export class ProductDetailsComponent implements OnInit {
     )
   }
 
-  
+  addToWishList(prodId:string){
+    this._addToWishList.addToWishList(prodId).subscribe(
+    {
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+
+      },
+      complete: () => {
+        console.log("completed");
+      }
+    }
+  )
+  }
+
+
   changeImageCover(image: string) {
     this.product.imageCover = image;
   }

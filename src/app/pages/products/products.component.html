@@ -58,7 +58,7 @@
 
               <span class="p-fluid">
                 <p-autoComplete [(ngModel)]="productFound" [suggestions]="filteredProducts"
-                  (completeMethod)="searchForProduct($event)" field="title" [delay]="1000" [minLength]="3"
+                  (completeMethod)="searchForProduct($event)" field="title" [delay]="300" [minLength]="1"
                   [multiple]="false" placeholder="Search...">
                   <ng-template let-product pTemplate="item">
                     <div class="d-flex justify-content-between align-content-center gap-2">
