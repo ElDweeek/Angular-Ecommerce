@@ -9,13 +9,13 @@
       </div>
 
       @if (cartProducts.length==0 && isLoading) {
-      <loader />
-      <loader />
+      <loader></loader>
       }@else if (cartProducts.length==0 && !isLoading) {
       <div class="text-center p-5">
         <h2>your cart is empty!</h2>
         <p>Browse our categories and discover our best deals!</p>
-        <button (click)="navigatToProducts()" class="bg-main px-4 py-2 border-0 rounded-2 text-white"> Start Shopping now </button>
+        <button (click)="navigatToProducts()" class="bg-main px-4 py-2 border-0 rounded-2 text-white"> Start Shopping
+          now </button>
       </div>
       }@else {
       @for (cartProdcut of cartProducts; track $index) {
@@ -44,7 +44,6 @@
             </button>
           </div>
 
-          <div class="col-2">{{ cartProdcut.price }} EGP</div>
           <div class="col-2">{{ cartProdcut.price }} EGP</div>
 
           <div class="col-2">
