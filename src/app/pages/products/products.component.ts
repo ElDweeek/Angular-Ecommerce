@@ -25,15 +25,15 @@ import { BraAndCatProductsComponent } from "../../components/bra-and-cat-product
 export class ProductsComponent implements OnInit, OnDestroy {
 
   rangeValues: number[] = [];
-  active: string ="";
+  active: string = "";
   //---------------------------
   productsHeader: string = "All Products"
   products: Array<Product> = [];
   //-----------------------------
   productFound: any = '';
   filteredProducts: any[] = [];
-  minPrice!:number
-  maxPrice!:number
+  minPrice!: number
+  maxPrice!: number
   //-----------------------------
   paginatedProducts: Array<Product> = [];
   start = 0;
@@ -84,35 +84,35 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const sourceArray = this.filteredProducts.length > 0 ? this.filteredProducts : this.products;
 
     this.paginatedProducts = sourceArray.slice(start, end);
-}
+  }
 
-sortByNameAtoZ() {
+  sortByNameAtoZ() {
     this.products.sort((a, b) => a.title.localeCompare(b.title));
     this.filteredProducts = this.products;
     this.currentPageProducts = 0;
     this.updatePaginatedProducts();
-}
+  }
 
-sortByNameZtoA() {
+  sortByNameZtoA() {
     this.products.sort((a, b) => b.title.localeCompare(a.title));
     this.filteredProducts = this.products;
     this.currentPageProducts = 0;
     this.updatePaginatedProducts();
-}
+  }
 
-sortByPriceLowtoHigh(){
-    this.products.sort((a,b)=> a.price - b.price);
+  sortByPriceLowtoHigh() {
+    this.products.sort((a, b) => a.price - b.price);
     this.filteredProducts = this.products;
     this.currentPageProducts = 0;
     this.updatePaginatedProducts();
-}
+  }
 
-sortByPriceHightoLow(){
-    this.products.sort((a,b)=> b.price - a.price);
+  sortByPriceHightoLow() {
+    this.products.sort((a, b) => b.price - a.price);
     this.filteredProducts = this.products;
     this.currentPageProducts = 0;
     this.updatePaginatedProducts();
-}
+  }
 
   filterProductsByPrice() {
     const [minPrice, maxPrice] = this.rangeValues;
@@ -132,18 +132,36 @@ sortByPriceHightoLow(){
     const query = event.query.toLowerCase();
 
     if (!query) {
-        // If the search query is cleared, show all products
-        this.filteredProducts = this.products;
+      this.filteredProducts = this.products;
     } else {
-        // Otherwise, filter the products based on the search query
-        this.filteredProducts = this.products.filter(product =>
-            product.title.toLowerCase().includes(query)
-        );
+      this.filteredProducts = this.products.filter(product =>
+        product.title.toLowerCase().includes(query)
+      );
     }
-
     this.currentPageProducts = 0;
     this.updatePaginatedProducts();
+  }
+
+
+filterByQuery() {
+  if (this.productFound) {
+      let query: string;
+
+      if (typeof this.productFound === 'string') {
+          query = this.productFound.toLowerCase();
+      } else if (this.productFound.title) {
+          query = this.productFound.title.toLowerCase();
+      }
+
+      if (query) {
+          this.filteredProducts = this.products.filter(product =>
+              product.title.toLowerCase().includes(query)
+          );
+          this.updatePaginatedProducts();
+      }
+  }
 }
+
 
   ngOnDestroy() {
     if (this._subscription) {
