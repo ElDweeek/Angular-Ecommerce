@@ -5,6 +5,7 @@ import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { AuthorizationService } from '../../services/users/authorization.service';
 
@@ -37,12 +38,15 @@ export class ShippingAddressesComponent implements OnInit {
   }
 
   createContact(): FormGroup {
-    return this.fb.group({
-      name: '',
-      details: '',
-      phone: '',
-      city: '',
-    });
+    return this.fb.group(
+      {
+        name: ['', Validators.required],
+        details: ['', Validators.required],
+        phone: ['', Validators.required],
+        city: ['', Validators.required],
+      },
+      Validators.required
+    );
   }
 
   addAddress(): void {
@@ -54,23 +58,29 @@ export class ShippingAddressesComponent implements OnInit {
     this.contacts.removeAt(index);
   }
   addUserAddress() {
-    console.log(this.form.value);
-    console.log(this.form.valid);
+    console.log(this.contacts.value);
+    console.log(this.contacts.valid);
+
     this.successMsg = '';
     const flattenedContacts = this.contacts.value;
-    this._authorizationService.addAddresses(flattenedContacts).subscribe({
-      next: (res) => {
-        this.successMsg = res.message;
-        console.log(res);
-      },
-      error: (err) => {
-        this.failedMsg = err.error.message;
-        console.error(err);
-      },
-      complete: () => {
-        console.log('Address addition process completed.');
-      },
-    });
+    if (!this.contacts.valid) {
+      this.failedMsg = 'Please fill out all required fields.';
+      return;
+    } else {
+      this._authorizationService.addAddresses(flattenedContacts).subscribe({
+        next: (res) => {
+          this.successMsg = res.message;
+          console.log(res);
+        },
+        error: (err) => {
+          this.failedMsg = err.error.message;
+          console.error(err);
+        },
+        complete: () => {
+          console.log('Address addition process completed.');
+        },
+      });
+    }
   }
   deleteAddresses() {
     this.successMsg = '';
@@ -102,6 +112,7 @@ export class ShippingAddressesComponent implements OnInit {
   //   return contacts.controls.map((control) => control.value);
   // }
   getAddresses() {
+    this.successMsg = '';
     this._authorizationService.getUserAddresses().subscribe({
       next: (res) => {
         this.addresses = res.data;

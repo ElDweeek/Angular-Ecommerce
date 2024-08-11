@@ -11,6 +11,63 @@
           *ngFor="let contact of contacts.controls; let i = index"
           [formGroupName]="i"
         >
+          @for (address of addresses; track $index) {
+          <fieldset>
+            <legend class="fw-bold">Address Information</legend>
+            <div class="form-outline form-white">
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control form-control-lg"
+                placeholder="{{ address.name }}"
+              />
+              <label class="form-label" [for]="'form3Examplea2-'"
+                >Address</label
+              >
+            </div>
+
+            <div id="demo-form">
+              <p class="field--wrapper">
+                <select
+                  id="select-country"
+                  name="select-country"
+                  class="demo-default form-control form-control-lg"
+                  placeholder="Confirm your country"
+                  formControlName="details"
+                >
+                  <option value="" selected>{{ address.details }}</option>
+                </select>
+              </p>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-outline form-white">
+                  <input
+                    type="tel"
+                    formControlName="phone"
+                    class="form-control form-control-lg"
+                    placeholder="{{ address.phone }}"
+                  />
+                  <label class="form-label">phone</label>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="form-outline form-white">
+                  <input
+                    type="text"
+                    formControlName="city"
+                    class="form-control form-control-lg"
+                    placeholder="{{ address.city }}"
+                  />
+                  <label class="form-label">City</label>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+          </fieldset>
+          }
           <fieldset>
             <legend class="fw-bold">Address Information</legend>
             <div class="form-outline form-white">
@@ -358,7 +415,7 @@
         Delete Address
       </button>
     </div>
-    <!-- <div class="bottom-50 mt-4">
+    <div class="bottom-50 mt-4">
       <button
         type="button"
         (click)="getAddresses()"
@@ -366,6 +423,6 @@
       >
         Get Address
       </button>
-    </div> -->
+    </div>
   </div>
 </div>
