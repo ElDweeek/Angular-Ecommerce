@@ -15,7 +15,7 @@ import { SingleProductComponent } from "../single-product/single-product.compone
 export class BraAndCatProductsComponent implements OnInit {
   products: Array<Product> = [];
   isLoading: boolean = true;
-  displayName:string = 'Choose Brand Or Category';
+  displayName:string = '';
   displayType:string = '';
 
   constructor(private route: ActivatedRoute, private _productsService: ProductsService) {}
@@ -43,7 +43,7 @@ export class BraAndCatProductsComponent implements OnInit {
   getProductsByCategory(name: string) {
     this._productsService.getProductsByCategory(name).subscribe({
       next: (res) => {
-        this.products = res; // Assign directly as the service already returns the filtered products
+        this.products = res;
         this.isLoading = false;
       },
       error: (err) => {
@@ -56,7 +56,7 @@ export class BraAndCatProductsComponent implements OnInit {
   getProductsByBrand(name: string) {
     this._productsService.getProductsByBrands(name).subscribe({
       next: (res) => {
-        this.products = res; // Assign directly as the service already returns the filtered products
+        this.products = res;
         this.isLoading = false;
       },
       error: (err) => {

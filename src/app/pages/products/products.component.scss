@@ -43,14 +43,14 @@ ul li>span {
   }
 }
 
-:host ::ng-deep ul#pn_id_1_list {
+:host ::ng-deep .p-autocomplete-panel .p-autocomplete-items {
   padding: 0;
 
 }
-:host ::ng-deep ul#pn_id_1_list {
-  padding: 0;
+// :host ::ng-deep ul#pn_id_1_list {
+//   padding: 0;
 
-}
+// }
 :host ::ng-deep ul#pn_id_1_list li {
   font-weight: 700;
   border-bottom: 1px solid #eee;
