@@ -35,15 +35,19 @@ import { BraAndCatProductsComponent } from '../../components/bra-and-cat-product
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   rangeValues: number[] = [];
+
   active: string = '';
+
   //---------------------------
   productsHeader: string = 'All Products';
   products: Array<Product> = [];
   //-----------------------------
   productFound: any = '';
   filteredProducts: any[] = [];
+
   minPrice!: number;
   maxPrice!: number;
+
   //-----------------------------
   paginatedProducts: Array<Product> = [];
   start = 0;
@@ -145,19 +149,32 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const query = event.query.toLowerCase();
 
     if (!query) {
-      // If the search query is cleared, show all products
-
       this.filteredProducts = this.products;
-      console.log(this.filteredProducts);
     } else {
-      // Otherwise, filter the products based on the search query
       this.filteredProducts = this.products.filter((product) =>
         product.title.toLowerCase().includes(query)
       );
     }
-
     this.currentPageProducts = 0;
     this.updatePaginatedProducts();
+  }
+  filterByQuery() {
+    if (this.productFound) {
+      let query: string;
+
+      if (typeof this.productFound === 'string') {
+        query = this.productFound.toLowerCase();
+      } else if (this.productFound.title) {
+        query = this.productFound.title.toLowerCase();
+      }
+
+      if (query) {
+        this.filteredProducts = this.products.filter((product) =>
+          product.title.toLowerCase().includes(query)
+        );
+        this.updatePaginatedProducts();
+      }
+    }
   }
 
   ngOnDestroy() {
